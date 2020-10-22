@@ -1,0 +1,138 @@
+package com.nanam.pointDB;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import com.nanam.bookDB.BookDAO;
+
+import util.DBManager;
+
+public class PointDAO {
+
+
+	private static PointDAO getInstance=new PointDAO(); 
+
+	public static  PointDAO getInstance(){
+
+		return getInstance;
+
+	}
+	
+	
+	public Point InsertAndUpdatePoint(String pointId,String pointTicket,String point ) {
+		System.out.println("insetPoint()");
+		int result=0;
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		int pointTicketNum=Integer.parseInt(pointTicket);
+		int pointSize=Integer.parseInt(point);
+		Point p=null;
+		
+      try {
+
+    	 
+    	  conn = DBManager.getConnection();
+    	  String sql ="MERGE INTO point USING member ON (pointId !=member.id And pointid is not null ) WHEN MATCHED THEN UPDATE SET initPoint=(initPoint+?), pointSize=?,pointticketNum=?  WHEN NOT MATCHED THEN INSERT (pointId,pointticketNum,pointSize,initpoint) VALUES (?,?,?,?)";
+
+    	  pstmt = conn.prepareStatement(sql);
+    	  
+    	  
+    	  pstmt.setInt(1, pointSize );
+    	  pstmt.setInt(2, pointSize);
+    	  pstmt.setInt(3, pointTicketNum);
+    	  pstmt.setString(4, pointId);
+    	  pstmt.setInt(5, pointTicketNum);
+    	  pstmt.setInt(6, pointSize);
+    	  pstmt.setInt(7, pointSize);
+    	
+    	  result=pstmt.executeUpdate();
+    	  
+    	  p=new Point();
+    	  
+    	  p.setPointId(pointId);
+    	  p.setPointSize(pointSize);
+    	  p.setPointTicketNum(pointTicketNum);
+    	  p.setInitpoint(pointSize);
+    	 
+    	  
+ 
+    	  
+    	  return p;
+    	
+    	  
+
+      } catch (Exception e) {
+         // TODO: handle exception
+    	 
+         e.printStackTrace();
+      } finally {
+         DBManager.close(conn, pstmt);
+         
+      }
+	return p;
+	
+	
+	}	
+	
+	
+	public Point selectPoint(String pointId) {
+		System.out.println("selectPoint()");
+		int result=0;
+		
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rset=null;
+		PreparedStatement pstmt=null;
+		Point p=null;
+		
+      try {
+
+    	 
+    	  conn = DBManager.getConnection();
+    	  String sql ="SELECT * FROM point where pointid=?";
+
+    	  pstmt=conn.prepareStatement(sql);
+    	  
+    	  pstmt.setString(1, pointId);
+    	  
+    	  
+    	  rset=pstmt.executeQuery();
+    	  
+    	
+    	  if(rset.next()) {
+    	  p=new Point();
+    	  
+    	  p.setInitpoint(rset.getInt("initpoint"));
+    	  p.setPointChargeDate(rset.getTimestamp("pointChargeDate"));
+    	  p.setPointId(rset.getString("pointid"));
+    	  p.setPointSize(rset.getInt("pointSize"));
+    	  p.setPointTicketNum(rset.getInt("pointTicketNum"));
+    	  
+    	  
+    	  return p;
+    	  }
+ 
+    	  
+
+    	
+    	  
+
+      } catch (Exception e) {
+         // TODO: handle exception
+    	 
+         e.printStackTrace();
+      } finally {
+         DBManager.close(conn,pstmt);
+         
+      }
+	return p;
+	
+	
+	}	
+	
+
+}

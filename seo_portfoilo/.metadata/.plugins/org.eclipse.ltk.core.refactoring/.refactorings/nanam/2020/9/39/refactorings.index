@@ -1,0 +1,15 @@
+1600571521150	Rename type 'TotalBookNum'
+1601011266513	Delete element
+1601011316761	Delete element
+1601015812591	Copy compilation unit
+1601015838367	Rename type 'CechBookNum'
+1601028490545	Copy compilation unit
+1601102051935	Rename type 'PayDTO'
+1601102303191	Delete element
+1601110610537	Rename type 'OderInset'
+1601110665979	Rename type 'oderDAO'
+1601110911123	Rename type 'Oder'
+1601110924766	Rename type 'OderDAO'
+1601143139449	Rename type 'OderSelect'
+1601143662964	Rename package 'com.nanam.orderDB'
+1601149565047	Rename type 'OderInsertAndSelect'

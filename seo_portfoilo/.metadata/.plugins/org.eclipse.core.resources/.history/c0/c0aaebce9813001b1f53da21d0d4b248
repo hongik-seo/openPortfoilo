@@ -1,0 +1,103 @@
+package com.nanam.payController;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+
+import com.nanam.buyDB.Buy;
+
+import com.nanam.cartDB.Cart;
+import com.nanam.orderBookDB.OrderBookDAO;
+
+
+
+@WebServlet("/pay/orderInsert")
+public class OrderView extends HttpServlet {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	
+	String result;
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	
+		// TODO Auto-generated method stub
+	
+		
+		
+		String buyId=req.getParameter("buyId"); 
+		
+		String[] price=req.getParameterValues("bookPrice");
+		String[] num=req.getParameterValues("bookNum");
+		String[] image=req.getParameterValues("bookImg");
+		String[] title=req.getParameterValues("bookTitle");
+		String[] ISBN=req.getParameterValues("bookISBN");
+		
+		String totalPrice=req.getParameter("totalPrice");
+		
+		
+		String totalLeng=req.getParameter("leng");
+		
+		int leng=Integer.parseInt(totalLeng);
+		
+		
+		
+	
+		
+		
+		
+		ArrayList<Buy> buyList=new ArrayList<Buy>();
+	
+		for(int i=0; i<leng; i++) {
+	
+			int buyNum=Integer.parseInt(num[i]);
+			int buyPrice=Integer.parseInt(price[i]);
+		
+			System.out.println("buyNum ::"+buyNum);
+			
+			String buyImage=image[i];
+			String buyTitle=title[i];
+			String buyISBN=ISBN[i];
+			
+			Buy	buy= new Buy();
+
+			buy.setBuyEachNum(buyNum);
+			buy.setBuyEachPrice(buyPrice);
+			buy.setCartBookImageName(buyImage);
+			buy.setCartBookTitle(buyTitle);
+			buy.setBuyISBN(buyISBN);
+			buyList.add(buy);
+			
+			
+			//orderControl.insertCartNum(buyNum,buyPrice)
+			
+		}
+		
+		OrderBookDAO orderControl=null;
+		
+		orderControl=OrderBookDAO.getInstance();
+		
+		ArrayList<Buy> buyList2=orderControl.selectOrderView(buyId,buyList,totalPrice);
+		
+		
+		req.setAttribute("buy", buyList2);
+		
+		
+		result="/pay/orderFront";
+
+		
+		req.getRequestDispatcher(result).forward(req, resp);
+		
+		
+	}
+
+	
+}

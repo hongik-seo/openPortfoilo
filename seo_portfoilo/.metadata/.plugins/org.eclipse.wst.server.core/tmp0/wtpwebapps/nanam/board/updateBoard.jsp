@@ -9,13 +9,10 @@
 <link rel="stylesheet" type="text/css" href="${nanam}/css/updateBoard.css">
       
            
+<c:set var="b" value="${b }"/>
         
-  <form id="sForm" action="/nanam/board/updateBoardMain" method="get">
+<form id="sForm" action="/nanam/board/updateBoardMain" method="get">
   
-  
-     
-        
-    
 <div id="noticeInputWrap">
 
 	<!--inner인풋 영역-->
@@ -52,15 +49,8 @@
 				<!--분류-->
 				<div id="choiceNotice" class="caption">
 					<h2>수정 게시판</h2>
-					<!--캡션-->
-					<!--  <select style="width: 150px;" name="list" id="list">
-						<option value='essay'>발행인 에세이</option>
-						<option value='nanam'>언론이 본 나남</option>
-						<option value='notice'>공지사항</option>
-					</select>-->
 					
-				
-					
+		
 				</div>
 				<!--//분류-->
 				<!--제목 입력창 영역-->
@@ -70,7 +60,7 @@
 					
 
 					
-		<input type="text" id="subject" class="write" name="subject" placeholder="${b.subject }" >
+		<input type="text" id="subject" class="write" name="subject" placeholder="${b.subject}" >
 					<!--제목 폼-->
 				</div>
 				<!--//제목 입력창-->
@@ -83,7 +73,7 @@
 				<div id="bodyArea">
 					<p>본문</p>
 
-					<textarea id="content" name="content" class="write" cols="40" rows="8" >${b.content }</textarea>
+					<textarea id="content" name="content" class="write" cols="40" rows="8" placeholder="${b.content}"  ></textarea>
 
 				</div>
 

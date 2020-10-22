@@ -446,3 +446,41 @@
 
 10월 22, 2020 15:44:09.52 NEW SESSION
 10월 22, 2020 15:44:09.52 [1022/154409.221:ERROR:directory_reader_win.cc(43)] FindFirstFile: 지정된 경로를 찾을 수 없습니다. (0x3)
+
+10월 22, 2020 21:11:09.23 NEW SESSION
+10월 22, 2020 21:11:09.23 [11268:10716:1022/211108.949:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
+10월 22, 2020 21:11:31.01 [11268:10716:1022/211131.016:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
+10월 22, 2020 21:12:11.81 [11268:10716:1022/211211.817:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
+10월 22, 2020 21:13:53.16 [11268:10716:1022/211353.164:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
+10월 22, 2020 21:16:49.64 [11268:10716:1022/211649.649:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
+10월 22, 2020 21:19:45.78 [2888:9412:1022/211945.779:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
+10월 22, 2020 21:20:07.96 [2888:9412:1022/212007.961:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
+10월 22, 2020 21:21:04.95 [2888:9412:1022/212104.958:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
+10월 22, 2020 21:22:35.79 [2888:9412:1022/212235.795:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
+10월 22, 2020 21:24:50.62 [2888:9412:1022/212450.626:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
+10월 22, 2020 21:25:33.78 [2888:9412:1022/212533.786:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+10월 22, 2020 21:29:41.33 [1022/212941.333:ERROR:directory_reader_win.cc(43)] FindFirstFile: 지정된 경로를 찾을 수 없습니다. (0x3)
+10월 22, 2020 21:54:23.89 [5000:1036:1022/215423.899:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
+10월 22, 2020 21:54:47.62 [5000:1036:1022/215447.626:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
+10월 22, 2020 21:57:06.05 [3260:14416:1022/215706.056:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
+10월 22, 2020 21:57:26.33 [3260:14416:1022/215726.337:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
+10월 22, 2020 21:58:07.99 [3260:14416:1022/215807.991:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
+10월 22, 2020 21:59:54.20 [3260:14416:1022/215954.203:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
+10월 22, 2020 22:03:50.34 [3260:14416:1022/220350.349:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
+10월 22, 2020 22:06:59.41 [1022/220659.416:ERROR:directory_reader_win.cc(43)] FindFirstFile: 지정된 경로를 찾을 수 없습니다. (0x3)
+10월 22, 2020 22:09:24.14 [3260:14416:1022/220924.147:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
+10월 22, 2020 22:10:26.22 [7928:4016:1022/221026.220:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
+10월 22, 2020 22:10:50.96 [7928:4016:1022/221050.966:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
+10월 22, 2020 22:11:36.01 [7928:4016:1022/221136.012:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
+10월 22, 2020 22:12:56.81 [7928:4016:1022/221256.819:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
+10월 22, 2020 22:15:39.12 [7928:4016:1022/221539.129:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
+10월 22, 2020 22:20:17.93 [1022/222017.932:ERROR:directory_reader_win.cc(43)] FindFirstFile: 지정된 경로를 찾을 수 없습니다. (0x3)
+10월 22, 2020 22:21:35.22 [7928:4016:1022/222135.219:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
+10월 22, 2020 22:22:19.20 [7928:4016:1022/222219.209:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+10월 22, 2020 22:25:54.75 [15352:15068:1022/222554.757:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+10월 22, 2020 22:26:16.17 [15352:15068:1022/222616.174:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
+10월 22, 2020 22:27:01.98 [15352:15068:1022/222701.989:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+10월 22, 2020 22:27:10.82 [15352:15068:1022/222710.819:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+10월 22, 2020 22:27:13.44 [15352:15068:1022/222713.442:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
+10월 22, 2020 22:32:41.09 [1022/223241.097:ERROR:directory_reader_win.cc(43)] FindFirstFile: 지정된 경로를 찾을 수 없습니다. (0x3)
+10월 22, 2020 22:52:34.88 [15352:15068:1022/225234.885:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106

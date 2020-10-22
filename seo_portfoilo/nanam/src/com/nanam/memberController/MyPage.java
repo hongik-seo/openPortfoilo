@@ -68,21 +68,18 @@ public class MyPage extends HttpServlet {
 		
 		HttpSession session=req.getSession(true);
 		
-		
-		
-		if(updateMember!=null) {
 			
-			session.setAttribute("login", updateMember);
-			session.getAttribute("login");
+		session.setAttribute("login", updateMember);
+		session.getAttribute("login");
 			
-		}
+		
 		
 
 
 
 
 
-		result="/member/myPageResult.jsp";
+		result="/main/index.jsp";
 
 
 

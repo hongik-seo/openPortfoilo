@@ -47,7 +47,7 @@
 				<tr class="caption">
 					<td>${i.qseq }</td>
 					<td>${status.count}</td>
-					<td><a href="/nanam/board/showDetail?list=${i.list}${li.list}&subject=${i.subject}${li.subject}&content=${i.content}${li.content}">${i.subject}</a></td>
+					<td><a href="/nanam/board/showDetail?list=${i.list}&subject=${i.subject}&content=${i.content}">${i.subject}</a></td>
 					<td>${i.adjustIndate}</td>
 				
 				</tr>

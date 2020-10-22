@@ -5,6 +5,8 @@
        
     
     <link rel="stylesheet" href="${nanam}/css/bookDetail.css">
+    
+    
     <c:set var="book" value="${book }"/>
      <!--서브 책 소개-->
      
@@ -40,17 +42,17 @@
 		<div id="booksInfor">
                <!-- 테이블 영역-->
                     <c:if test="${book.bookList eq 'hot'}">	
-       	<img src="${nanam}/images/newbook_list/${img}${book.imgName}">
+       	<img src="${nanam}/images/newbook_list/${book.imgName}">
         </c:if>
         
         
    	      <c:if test="${book.bookList eq 'steady'}">
-       	<img src="${nanam}/images/steadyseller_list/${img}${book.imgName}">
+       	<img src="${nanam}/images/steadyseller_list/${book.imgName}">
         </c:if>
           
         
    	      <c:if test="${book.bookList eq 'nBook'}">
-       	<img src="${nanam}/images/nanambook_list/${img}${book.imgName}">
+       	<img src="${nanam}/images/nanambook_list/${book.imgName}">
         </c:if>
                <div id="tableWrap">
                       <c:if test="${sessionScope.login.id eq'scott' and login.pwd eq 'tiger'}">

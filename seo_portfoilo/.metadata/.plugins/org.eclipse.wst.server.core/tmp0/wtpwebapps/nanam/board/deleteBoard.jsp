@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="${nanam}/css/inputnotice.css">
 <link rel="stylesheet" type="text/css" href="${nanam}/css/detailBoard.css">
       
-           
+   <c:set var="b" value="${b }" />    
         
   <form id="sForm" action="/nanam/board/deleteBoardMain" method="get">
   

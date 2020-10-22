@@ -38,10 +38,7 @@ public class UpdateBoardMain extends HttpServlet {
 		
 		
 		
-		String qseq=req.getParameter("qseq");
-		
-	
-		
+		String qseq=req.getParameter("qseq");		
 		String subject=req.getParameter("subject");
 		String content=req.getParameter("content");
 		
@@ -52,16 +49,11 @@ public class UpdateBoardMain extends HttpServlet {
 	
 		BoardDAO bControl=null;
 		bControl=BoardDAO.getInstance();
-		Board b=bControl.update(qseq, subject, content);
+		bControl.update(qseq, subject, content);
 		
 	
-		req.setAttribute("b", b);
-		result="/board/detailFront";
 		
-		
-		
-		
-		
+		result="/board/updateBoardFront";
 		
 		
 		req.getRequestDispatcher(result).forward(req, resp);

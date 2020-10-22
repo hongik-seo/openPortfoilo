@@ -358,6 +358,7 @@ public class MemberDAO{
 
 			Connection conn = null;
 			PreparedStatement pstmt = null;
+			PreparedStatement pstmt2 = null;
 			ResultSet rset=null;
 			Member member = null;
 
@@ -365,7 +366,7 @@ public class MemberDAO{
 			try {
 
 			
-				String sql="SELECT *FROM member WHERE name=? AND phone=?";
+				String sql="SELECT *FROM member m WHERE name=? AND phone=? And m.id not in('scott')";
 				System.out.println(sql);
 				conn = DBManager.getConnection();
 				pstmt=conn.prepareStatement(sql);
@@ -376,6 +377,11 @@ public class MemberDAO{
 
 
 				rset=pstmt.executeQuery();
+				
+				
+				
+	
+				
 				if(rset.next()) {
 					member = new Member();
 
@@ -409,6 +415,8 @@ public class MemberDAO{
 			ResultSet rset=null;
 			Connection conn = null;
 			PreparedStatement pstmt = null;
+			PreparedStatement pstmt2 = null;
+			
 			Member member=null;
 			Statement stmt=null;
 			
@@ -437,8 +445,17 @@ public class MemberDAO{
 	         result = pstmt.executeUpdate();
 	         
 	     
-	         stmt=conn.createStatement();
-	         rset=stmt.executeQuery("SELECT * FROM member");
+	         
+	         String sql2="SELECT * FROM member where id=? And name=?";	         
+	         pstmt2=conn.prepareStatement(sql);
+	         
+	         
+	         
+	         
+	         pstmt2.setString(1, id);
+	         pstmt2.setString(2, name);
+	         
+	         rset=pstmt.executeQuery();
 	         
 	         while(rset.next()) {
 	         member=new Member();
@@ -455,10 +472,10 @@ public class MemberDAO{
 	         
 	         System.out.println("정보입력 완료");
 	         isDelete=true;
-        	 return member;
+        	 
 
 	         }
-	
+	         return member;
 	     
 	      } catch (Exception e) {
 	         // TODO: handle exception

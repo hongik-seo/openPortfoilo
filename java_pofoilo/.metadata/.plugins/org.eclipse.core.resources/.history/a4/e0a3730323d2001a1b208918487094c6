@@ -1,0 +1,246 @@
+package banking;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class User  {
+	
+	
+	String  userAccountNum;
+
+	String userName;
+
+	private int money;
+
+	private int balance;
+	
+	private int userPWD;
+
+	private final int MAX_COUNT=5;
+	int count;
+
+	
+	public User() {}
+	
+	public int getBalance() {
+		return balance;
+	}
+
+
+	public void setBalance(int balance) {
+		this.balance = balance;
+	}
+
+	public int getUserPWD() {
+			
+			
+			
+		return userPWD;
+	}
+
+
+
+	public void setUserPWD(int userPWD) {
+		this.userPWD = userPWD;
+	}
+
+	
+	
+	public User(String userAccountNum, String userName,int userPWD) {
+
+		this.userAccountNum = userAccountNum;
+		this.userName = userName;
+		this.userPWD=userPWD;
+
+	}
+
+	
+	public User(String userAccountNum, String userName) {
+
+		this.userAccountNum = userAccountNum;
+		this.userName = userName;
+		
+
+	}
+	
+	public User(int money) {
+		
+		this.money=money;
+		
+	}
+	
+	
+	public String getUserAccountNum() {
+		return userAccountNum;
+	}
+
+
+	public void setUserAccountNum(String userAccountNum) {
+		this.userAccountNum = userAccountNum;
+	}
+
+
+	public String getUserName() {
+		return userName;
+	}
+
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+
+	public int getMoney() {
+		return money;
+	}
+
+
+	public void setMoney(int money) {
+		this.money = money;
+	}
+
+
+	public String getAll() {
+
+
+		return "계좌주 계좌번호는"+userAccountNum+"\n"+"계좌주 이름은"+userName;
+	}
+
+
+
+
+	public void setAll(String userAccountNum, String userName) {
+
+		this.userAccountNum = userAccountNum;
+		this.userName = userName;
+
+	}
+
+	public void getAllList() {
+
+
+		for(int i=0; i<Admin.list.size(); i++) {
+
+
+			System.out.println(Admin.list.get(i).getAll());;
+
+		}
+
+
+	}
+
+	public void setAllPlusMoney(String userAccountNum, String userName, int balance) {
+
+		this.userAccountNum = userAccountNum;
+		this.userName = userName;
+		this.balance=balance;
+
+	}
+
+
+
+
+
+
+	public void putMoney(int money,String userAccountNum) {
+
+
+		
+
+		for(int i=0; i<Admin.list.size(); i++) {
+
+			
+			
+			if(money>0&&money<10000000) {
+				if(Admin.list.get(i).getUserAccountNum().equals(userAccountNum)) {
+
+					Admin.list.get(i).balance+=money;
+					System.out.println(Admin.list.get(i).balance);
+
+				}
+
+
+			}else {
+				System.out.println("금액이 작습니다.");
+			}
+
+
+
+
+		}
+
+
+
+	}
+	
+	public void sendMoney(int sendMoney,String meAccountNum,String youAccountNum) {
+		
+		for(int i=0; i<Admin.list.size(); i++) {
+			
+			for(int t=0; t<Admin.list.size(); t++) {
+
+		
+				if(Admin.list.get(i).getUserAccountNum().equals(meAccountNum)&&Admin.list.get(t).getUserAccountNum().equals(youAccountNum)) {
+
+					Admin.list.get(i).balance-=sendMoney;
+					Admin.list.get(t).balance+=sendMoney;
+					System.out.println(Admin.list.get(i).balance);
+					
+
+				}
+			}
+		}
+	}
+		
+	
+	
+		
+	
+	public void takeMoney(int takeMoney,String takeUserAccountNum) {
+
+
+		for(int i=0; i<Admin.list.size(); i++) {
+
+			if(takeMoney<Admin.list.get(i).getBalance()) {
+				if(Admin.list.get(i).getUserAccountNum().equals(takeUserAccountNum)) {
+
+					Admin.list.get(i).balance-=takeMoney;
+					System.out.println(Admin.list.get(i).balance);
+
+				}
+			}else {
+				System.out.println("금액이 큽니다.");
+			}
+		}
+
+
+	}
+
+
+
+
+
+
+	public void thisUserinfo(String theUserName,String theUserAccountNum){
+
+
+
+		for(int i=0; i<Admin.list.size(); i++) {
+
+
+			if(Admin.list.get(i).getUserName().equals(theUserName)&&Admin.list.get(i).getUserAccountNum().equals(theUserAccountNum)) {
+
+
+				System.out.println(Admin.list.get(i).getAll()+"\n"+"계좌잔액은"+Admin.list.get(i).balance);
+
+			}
+
+		}
+
+
+	}
+
+
+
+
+
+}

@@ -1,0 +1,67 @@
+package banking;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Scanner;
+
+public class Account {
+	
+	static String userNameOfAccountString=Admin.adAccountName;
+	static String userAccountNumOfAccount=Admin.adAccountNum;
+	
+	
+	
+	
+	
+	
+	
+	public static String getUserNameOfAccountString() {
+		return userNameOfAccountString;
+	}
+
+
+
+
+
+
+
+	public static void setUserNameOfAccountString(String userNameOfAccountString) {
+		Account.userNameOfAccountString = userNameOfAccountString;
+	}
+
+
+
+
+
+
+
+	public static String getUserAccountNumOfAccount() {
+		return userAccountNumOfAccount;
+	}
+
+
+
+
+
+
+
+	public static void setUserAccountNumOfAccount(String userAccountNumOfAccount) {
+		Account.userAccountNumOfAccount = userAccountNumOfAccount;
+	}
+
+
+
+
+
+
+
+	public String returnAcccount() {
+		
+		
+		
+		return userNameOfAccountString+ userAccountNumOfAccount;
+	}
+	
+	
+	
+}

@@ -1,0 +1,70 @@
+package banking;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Scanner;
+
+public class Admin {
+	
+	
+	static ArrayList<User> list;
+	
+	Admin(){
+		list= new ArrayList<User>();
+		
+	}
+	
+
+
+
+	//private String userAccountNum;
+
+	//private String userName;
+
+
+	private int money;
+	
+	
+
+	
+	
+		
+
+	
+	
+	public void makeAccountList(String userAccountNum, String userName) {
+		
+		
+		list.add(new User(userAccountNum,userName));
+		
+	
+	}
+	
+	
+	/*public void showAccountlist() {
+
+		
+		
+		
+
+
+	}*/
+	
+	public void removeAccountList(String deletAcN) {
+
+		for(int i=0; i<list.size(); i++) {
+			if(list.get(i).getAll().contains(deletAcN)) {
+				
+				list.remove(i);
+				
+			}
+
+
+		}
+
+
+	}
+
+	
+}
+	

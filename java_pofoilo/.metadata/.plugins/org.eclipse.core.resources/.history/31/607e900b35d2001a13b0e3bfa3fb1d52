@@ -1,0 +1,23 @@
+package course;
+
+import java.util.Scanner;
+
+public class CourseMain {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		
+		Admin ad=new Admin();
+		
+		
+		Scanner sc=new Scanner(System.in);
+		
+		serialNum=sc.next();
+		ad.addStudentList(serialNum, major, score, studentPWD);
+		
+		
+		
+	}
+
+}

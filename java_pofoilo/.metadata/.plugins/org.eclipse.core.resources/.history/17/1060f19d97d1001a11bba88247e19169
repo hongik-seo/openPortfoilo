@@ -1,0 +1,18 @@
+package banking;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Scanner;
+
+public class Account {
+	
+	static String userNameOfAccount=User.userName;
+	static String userAccountNumOfAccount=User.userAccountNum;
+	
+	
+	
+	
+	
+	
+	
+}

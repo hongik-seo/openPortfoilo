@@ -1,0 +1,18 @@
+package banking;
+
+public class BankingMain {
+
+	public static void main(String[] args) {
+		
+		User user=new User();
+		Account ac=new Account();
+		Admin ad=new Admin();
+		
+		ac.setInputAll();
+		ad.makeAccountList();
+		
+		
+		
+	} 
+	
+}

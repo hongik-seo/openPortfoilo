@@ -1,0 +1,20 @@
+package course;
+
+public class SmartWeb implements Major {
+
+	
+	class primary{
+	@Override
+	public void java() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void oracle() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	}
+}

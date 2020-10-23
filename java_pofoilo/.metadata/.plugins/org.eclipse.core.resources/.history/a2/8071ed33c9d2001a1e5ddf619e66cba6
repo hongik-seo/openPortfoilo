@@ -1,0 +1,64 @@
+package course;
+
+import java.util.Scanner;
+
+public class CourseEgn {
+
+	
+	Admin ad=new Admin();
+	
+	public void adminChoice() {
+		while(true) {
+			
+			
+			System.out.println("===================================================================");
+			System.out.println("============1.학생추가|2.전교생 점수보기|3.학생 삭제|4.학생모드|4.종료==========");
+			System.out.println("===================================================================");
+
+			Scanner sc=new Scanner(System.in);
+			
+			String adminID=sc.next();
+			String adminPWD=sc.next();
+			
+			int adminChoice;
+			switch(adminChoice=sc.nextInt()) {
+
+			
+			case 1:
+				
+				if(adminID.equalsIgnoreCase("scott")&&adminPWD.equalsIgnoreCase("tiger")) {
+				System.out.print("학번은");int serialNum = sc.nextInt();
+				System.out.print("전공은");String major=sc.next();
+				System.out.print("이름은");String name=sc.next();
+				System.out.print("자바 점수는 ");int javaScore=sc.nextInt();
+				System.out.print("오라클 점수는");int dataScore=sc.nextInt();
+				
+				ad.addStudentList(serialNum,name, major, javaScore, dataScore);
+				}
+				break;
+
+
+			case 2: 
+				if(adminID.equalsIgnoreCase("scott")&&adminPWD.equalsIgnoreCase("tiger")) {
+				ad. showStudnetList();
+				}
+				break;
+			case 3:
+				if(adminID.equalsIgnoreCase("scott")&&adminPWD.equalsIgnoreCase("tiger")) {
+				System.out.println("삭제하실 학번은 입력해주세요");int findSerialNum=sc.nextInt();
+				ad.removeStudentList(findSerialNum=sc.nextInt());
+				}
+				break;
+				
+			case 4:
+				
+				
+
+			}
+
+
+
+		}
+
+	}
+}

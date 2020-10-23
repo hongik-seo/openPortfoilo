@@ -1,0 +1,116 @@
+package banking_Sysyem_Test;
+
+import java.util.Scanner;
+
+public class Customer{
+	
+	
+	Scanner sc=new Scanner(System.in);	
+	
+	//필드 선언
+	
+	String name;
+	int accountNum;
+	int balance;
+	int money;
+	int moneyResult;
+	int count;
+	
+	
+	
+	
+	/*public Customer(int accountNum, int money) {
+		
+		this.accountNum=accountNum=sc.nextInt();
+	
+		this.money= money=sc.nextInt();
+		
+	}*/
+	
+	
+	
+
+	public boolean intialMoney() {
+
+		accountNum=sc.nextInt();
+		name=sc.next();
+		balance+=money=sc.nextInt();
+
+		if((accountNum>20190000)&&(money>0)) {
+		System.out.println("계좌가 생성되었습니다.");
+			return true;
+		
+		}else {
+			
+			System.out.println("계좌번호 1000000이상 초기입금액 0원이상");
+			return false;
+		}
+	}
+	
+	public void result() {
+		
+		if((intialMoney()==true)||(saveMoney()==true)||(takeMoney() ==true)) {
+			
+			System.out.println(accountNum);
+			System.out.println(name);
+			System.out.println(balance);
+			
+		}else {
+			
+			System.out.println("계좌가 없습니다.");
+		}
+		
+		
+	}
+
+
+	
+
+	public boolean saveMoney() {
+		
+			
+		if(intialMoney()==true) {
+			balance+=money;
+			System.out.println("예금이 성공적으로 되었습니다.");
+			return true;
+			
+		}else {
+			
+		
+			return false;
+		}
+						
+			
+		}
+	
+	public boolean takeMoney() {
+		accountNum=sc.nextInt();
+		
+		if(intialMoney()==true&& saveMoney()==true) {
+			balance-=money;
+			System.out.println("출금이 성공적으로 되었습니다.");
+			return true;
+			
+		}else {
+		
+			return false;
+		}
+		
+		
+		
+		
+	}
+
+	
+	
+		
+	}
+
+
+	
+	
+
+	
+
+
+

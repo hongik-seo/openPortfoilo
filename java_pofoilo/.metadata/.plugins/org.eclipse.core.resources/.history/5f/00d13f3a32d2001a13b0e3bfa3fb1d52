@@ -1,0 +1,10 @@
+package course;
+
+public interface major {
+	
+	void primaryMajor();
+	
+	void scondaryMajor();
+
+	
+}

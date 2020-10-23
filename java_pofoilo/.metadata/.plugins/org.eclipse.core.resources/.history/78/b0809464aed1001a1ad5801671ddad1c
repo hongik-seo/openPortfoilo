@@ -1,0 +1,30 @@
+package banking;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Scanner;
+
+public class Account {
+	
+	static String userNameOfAccountString=Admin.adAccountName;
+	static String userAccountNumOfAccount=Admin.adAccountNum;
+	
+	
+	 public void showAccountList() {
+
+		 
+		 for(int i=0; i<Admin.accountList.size(); i++) {
+
+
+			 System.out.println(Admin.ac.userAccountNumOfAccount);
+			 System.out.println(Admin.ac.userNameOfAccountString);
+
+
+
+		 }
+
+	 }	
+	
+	
+
+}

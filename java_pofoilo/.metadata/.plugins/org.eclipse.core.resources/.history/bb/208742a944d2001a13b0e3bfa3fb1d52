@@ -1,0 +1,68 @@
+package course;
+
+public class Student {
+
+	
+	
+	String major;
+	int score;
+	String studentPWD;
+	
+	
+	
+	
+	
+	
+	Student(String major,int score){
+		
+		
+		this.major=major;
+		this.score=score;
+		
+		
+	}
+
+
+
+
+
+	
+
+
+	public String getMajor() {
+		return major;
+	}
+
+
+	public void setMajor(String major) {
+		this.major = major;
+	}
+
+
+	public int getScore() {
+		return score;
+	}
+
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+
+	public String getStudentPWD() {
+		return studentPWD;
+	}
+
+
+	public void setStudentPWD(String studentPWD) {
+		this.studentPWD = studentPWD;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+}

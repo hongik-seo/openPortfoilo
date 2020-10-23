@@ -1,0 +1,38 @@
+package course;
+
+public class Major{
+	
+
+	static class primary{
+		
+		
+
+		public void java() {
+			
+			
+			
+
+		}
+
+
+		public void oracle() {
+			// TODO Auto-generated method stub
+
+		}
+
+	}
+
+	static class scondary{
+
+		public void java() {
+			// TODO Auto-generated method stub
+
+		}
+
+
+		public void oracle() {
+			// TODO Auto-generated method stub
+
+		}
+	}
+}

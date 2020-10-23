@@ -1,0 +1,17 @@
+package banking;
+
+public class BankingMain {
+
+	public static void main(String[] args) {
+		
+		
+		BankingEng eng=new BankingEng();
+		
+		eng.adminChoice();
+		eng.userChoice();
+	
+		
+		
+	} 
+	
+}

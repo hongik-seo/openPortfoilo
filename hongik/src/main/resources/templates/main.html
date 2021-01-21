@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>홈페이지</title>
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+
+$(function(){
+	
+	$("#searchBtn").click(function(){
+		
+		var option=$("#option").val();
+		var keyword=$("#keyword").val();
+		
+		
+		
+		
+		$.ajax({
+			async:false,
+		    url: "/api/search",  
+		 	dataType:"json",
+		    data:{
+		    	"option":option,
+		    	"keyword":keyword,
+		    },
+				
+		    type: "GET",  
+		 	contentType: "application/json; charset=UTF-8" ,
+		    
+		    success: function(data){
+		    	
+		    	console.log(data);
+		    
+		    	
+		    	var ap='';
+			    
+		    	var list=data.content
+		   		
+		   		
+		    	for (var i = 0; i <list.length; i++) {
+		               
+		    		ap+="<table border=1>";
+		    		ap+="<tbody>";
+		    		ap+=   "<tr>";
+		    		ap+=         "<td style='width: 55px; padding-left: 30px;' align='center' id='codeType'>"+ list[i].code_type + "</td>";
+		    		ap+=         "<td style='width: 50px; padding-left: 10px;' align='center'>"+ list[i].num+"</td>";
+		    		ap+=         "<td style='width: 125px;' align='center'>"+"<a href='./freeBoardDetail.ino?num="+list[i].num+"'>"+list[i].title+"</a></td>";
+		    		ap+=         "<td style='width: 48px; padding-left: 50px;'align='center'>"+list[i].name+"</td>";
+		    		ap+=         "<td style='width: 100px; padding-left: 95px;' align='center'>"+list[i].regdate+"</td>";
+		            ap+= "</tr>";
+		            ap+= "</div>"; 
+		            ap+="</tbody>";
+		           ap+="</table>";
+		               
+		               
+		                
+		            }
+		             
+	             if(list <= 0){
+	            	ap+="<tr>";
+	               	ap+=   "<td style='width: 600px; '' align='center'>조회된 글이 없습니다</td>";
+	               	ap+="</tr>";
+	               
+	              
+	            }
+	             document.getElementById("here").innerHTML = ap;
+		    
+		    
+	             	var page="";
+	             
+	             	var startNumber=(Math).floor(data.number/10)*10+1;
+					var endNumber=(data.total_pages > startNumber+9) ? startNumber+9 : data.total_pages 
+							
+							
+	            	console.log(startNumber)
+					console.log(endNumber);		
+					var total=data.total_pages
+	 		 	
+	            	page+=  "<nav style='text-align:center'>"
+	            	page+="<ul>"
+	            	page+=				"<li>"
+	            	page+=	"<a  href='/api/main?page=''"+1+"'>"
+	            	page+=		"<"
+	            	page+=	"</a>"
+	            	page+="</li>"
+	   				
+	            	for(var i=startNumber; i<=endNumber; i++ ){
+	            	page+="<li>"
+	            	page+=	"<a href='/api/main?page=''"+i+"'>"
+	            	page+=			i
+	            	page+=	"</a>"
+	            	page+="</li>"
+	            	}
+	            	page+="<li>"
+	            	page+="<a href='/api/main?page=''"+total+"'>"
+	            	page+=	">"
+	            	page+="</a>"
+	            	page+="</li>"
+	            	page+="</ul>"			
+	            	page+="</nav>"
+	 			document.getElementById("page").innerHTML = page;
+		    
+		    
+		    }
+		 	
+		 	
+		 	
+		
+			
+		});
+		
+	});
+	
+});
+
+</script>  
+
+
+</script>    
+</head>
+<body>
+	<div>
+		<h1>자유게시판</h1>
+	</div>
+	
+	<div style="width:650px;" align="right" >
+		  <a th:href="@{'insert'}">글쓰기</a>
+	</div>
+	
+	<form id="testForm"  >
+	
+	
+		 <select id="option" name="option" >
+		 	<option  th:value="index" >글번호</option>	
+			<option  th:value="title" >글제목</option>	
+		</select>
+		<input type="text" id="keyword" name="keyword" th:value=${keyword}/>
+		<button id="searchBtn"type="button">검색</button>
+	</form>	
+	
+	<div  style="padding-bottom: 10px;">
+		<table border="1">
+			<thead>
+				<tr>
+					<td style="width: 55px; padding-left: 30px;" align="center">타입</td>
+					<td style="width: 50px; padding-left: 10px;" align="center">글번호</td>
+					<td style="width: 125px;" align="center">글제목</td>
+					<td style="width: 48px; padding-left: 50px;" align="center">글쓴이</td>
+					<td style="width: 100px; padding-left: 95px;"align="center">작성일시</td>
+				</tr>
+			</thead>
+		</table>
+	</div>
+
+	<div id="here">
+		<table border="1" >
+			<tbody id="change" >
+					<tr class="orders" th:each="group :${boardList}" >
+						<td style="width: 55px; padding-left: 30px;" align="center"><span th:text="${group.codeType}"></span></td>
+						<td style="width: 50px; padding-left: 10px;" align="center"><span th:text="${group.num}"></span></td>
+						<td style="width: 125px;" align="center"><a th:href="@{/api/detail(num=${group.num})}"><span th:text="${group.title}"></span></a></td>
+						<td style="width: 48px; padding-left: 50px;" align="center"><span th:text="${group.name}"></span></td>
+						<td style="width: 100px; padding-left: 95px;"align="center"><span th:text="${#temporals.format(group.regdate, 'yyyy-MM-dd HH:mm')}"></span></td>
+						
+					</tr>
+					
+			</tbody>
+			</table>
+		
+		</div >
+		
+		<div id="page">
+			<nav    >
+			 <ul class="pagination" th:with="startNumber=${T(Math).floor(boardList.number/10)}*10+1, endNumber=(${boardList.totalPages} >   ${startNumber}+9) ? ${startNumber}+9 :${boardList.totalPages}" >
+				<li><a aria-lebel="Previous" th:href="@{/api/main?page=1}">&laquo;</a></li>
+				<li th:each="page:${#numbers.sequence(startNumber,endNumber)}" th:class="(${page}==${boardList.number}+1)?'active'">
+					<a th:href="@{/api/main(page=${page})}" th:text="${page}"><span class="sr-only"></span></a>
+				</li>
+				<li><a aria-label="Next" th:href="@{/api/main(page=${boardList.totalPages})}">&raquo;</a></li>
+				</ul>			
+			</nav>
+		</div>	
+	
+			
+</body>
+</html>

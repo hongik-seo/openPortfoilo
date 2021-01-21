@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ino.web.commonCode.mapper">
+	
+	<select id="selectCommonCodeList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+
+      
+	      SELECT M.CODE, D.DECODE decodeList, D.DECODE_NAME optionList, M.USE_YN ,m.CODE_NAME CODE_NAME  FROM CODEM M INNER JOIN CODED D
+	      ON M.CODE = D.CODE
+	      WHERE M.CODE=#{code} and M.USE_YN = #{useyn} AND D.USE_YN = #{useyn}
+	    
+
+	</select>
+	
+	
+	<select id="selectComm"  resultType="java.util.HashMap">
+	
+			SELECT CODE, CODE_NAME, USE_YN  FROM CODEM 
+	
+	
+	</select>
+	
+	<select id="selectDComm"  resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	
+			
+			
+			SELECT CODE, DECODE, DECODE_NAME, USE_YN  FROM CODED
+	
+				where CODE =#{code}
+	
+	
+	
+	</select>
+	
+	<insert id="insertCom" parameterType="java.util.List"  >
+	
+	
+		<foreach collection="list" item="item" separator=";" open="DECLARE BEGIN" close="; END;" >
+	
+	
+		
+				INSERT INTO CODED (CODE,DECODE,DECODE_NAME,USE_YN)  VALUES (#{item.iCode},#{item.iDecode}, #{item.iDecodeName},#{item.iUseyn})
+    
+    
+   		 </foreach>
+    
+	</insert>
+	
+	
+	
+	<update id="updateCom"  parameterType="java.util.List">
+	
+	
+	
+		<foreach collection="list" item="item"  separator=";" open="DECLARE BEGIN" close="; END;">
+	
+			UPDATE CODED SET DECODE_NAME = #{item.uDecodeName} , USE_YN =#{item.uUseyn}  WHERE code = #{item.uCode} AND DECODE=#{item.uDecode} 
+	
+			
+		</foreach>
+	 
+		
+	
+	</update>
+	
+	<update id="deleteCom"  parameterType="java.util.List">
+	
+	
+			DELETE FROM CODED  WHERE  DECODE in 
+		
+			<foreach collection="list"  item="item" open="(" separator=","  close=")" >
+	
+		     
+			 #{item.dDecode} 
+		     
+			</foreach>
+		
+	
+	
+	</update>
+	
+	
+
+</mapper>

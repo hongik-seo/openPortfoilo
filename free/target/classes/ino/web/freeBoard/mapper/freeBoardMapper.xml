@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ino.web.freeBoard.mapper.FreeBoardMapper">
+
+
+	<select id="freeBoardGetList" resultType="freeBoardDto"  parameterType="java.util.HashMap" > <!-- resultType="ino.web.board.dto.BoardDto" -->
+	
+	select codeType, NUM, NAME, TITLE, CONTENT, ROWNUM RN, REGDATE regdate
+   	
+   	FROM(select ROWNUM rn, DECODE(CODE_TYPE,'01','자유','02','익명','03','QnA') AS codeType,
+	
+	NUM,NAME,TITLE,CONTENT, TO_CHAR(REGDATE, 'YYYY/MM/DD') AS regdate
+
+	FROM (SELECT * FROM FREEBOARD ORDER BY NUM DESC)  WHERE  ROWNUM <![CDATA[<=]]> (#{pageMaker.pageNum}*#{pageMaker.amount})
+
+		
+			
+		
+			
+			<if test="option =='DCOM001'">
+		
+		
+				 AND  NUM=#{keyword}
+		
+			</if>
+			
+		
+		
+		
+			<if test="option =='DCOM002'">
+		
+		
+				AND   title like '%'|| #{keyword}||'%' 
+		
+		
+			</if>
+			
+	
+		<if test="startDate !='' and endDate !='' ">
+		
+			AND TO_CHAR(REGDATE, 'YYYYMMDD') BETWEEN #{startDate} and #{endDate}
+		
+			<!--  <trim prefix="AND (" prefixOverrides="OR" suffix=")">
+		
+		
+			
+		
+							
+			</trim> -->
+			
+		
+		</if>
+
+
+
+	) where rn <![CDATA[>]]> ((#{pageMaker.pageNum}-1)*#{pageMaker.amount}) 
+	
+	 
+		
+		
+	 
+	</select>
+
+	<insert id="freeBoardInsertPro" parameterType="freeBoardDto"  useGeneratedKeys="true">
+	  	<selectKey keyProperty="num" resultType="INT" order="BEFORE" > 
+			SELECT NUM.NEXTVAL from dual
+		</selectKey>
+
+		
+		INSERT INTO FREEBOARD(CODE_TYPE, NUM, TITLE, NAME, REGDATE, CONTENT)
+		VALUES(#{codeType}, #{num}, #{title}, #{name}, SYSDATE, #{content})	
+		
+	
+	
+	</insert>
+	
+
+	<select id="freeBoardDetailByNum" resultType="freeBoardDto" parameterType="int">
+		SELECT  CODE_TYPE as codeType , NUM, TITLE, NAME, TO_CHAR(REGDATE,'YYYY/MM/DD') REGDATE, CONTENT FROM FREEBOARD
+		WHERE NUM=#{num}
+	</select>
+
+
+
+
+	<select id="freeBoardNewNum" resultType="int" parameterType="java.util.HashMap">
+		
+		
+		SELECT count(*)
+		FROM FREEBOARD where 1=1
+		
+	
+		
+	
+		<if test="option =='DCOM001'">
+			
+			AND	  (NUM=#{keyword}) 
+			  
+				 
+		</if>
+
+		<if test="option =='DCOM002'">
+
+			
+			AND  (title like '%'|| #{keyword}||'%') 
+			
+		</if>
+		
+	
+		
+		<if test="startDate !='' and endDate !='' ">
+		
+		
+		AND (TO_CHAR(REGDATE, 'YYYYMMDD') BETWEEN #{startDate} and #{endDate})
+		
+			<!--  <trim prefix="AND (" prefixOverrides="OR" suffix=")">
+		
+			
+			
+	
+							
+			</trim>-->
+		</if>
+
+		
+	</select>
+	
+	<update id="freeBoardModify" parameterType="freeBoardDto" >
+		UPDATE FREEBOARD
+		SET TITLE = #{title}
+				, CONTENT = #{content}
+		WHERE NUM = #{num}
+
+	</update>
+
+	<update id="freeBoardDelete" parameterType="int">
+		DELETE FROM FREEBOARD
+		WHERE NUM
+		= #{num}
+
+	</update>
+
+	
+
+
+</mapper>

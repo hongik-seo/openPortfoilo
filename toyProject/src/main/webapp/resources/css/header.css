@@ -1,0 +1,74 @@
+
+
+
+div#all-wrap{
+
+    width: 1500px;
+    height: 1500px;
+    margin: 0 auto;
+    
+}
+
+div#head{
+    
+    width: 1400px;
+    box-sizing: border-box;
+    padding: 0 50px 0 50px;
+    position: fixed;
+    background-color: white;
+    
+   
+}
+
+div#head::after{
+    content: "";
+    display: block;
+    clear: both;
+}
+
+div.img-box{
+
+    float: left;
+    margin : 30px 0px 0px 50px;
+}
+
+
+/*use*/
+
+div#use-gnb{
+    margin-top: 35px;
+    margin-left: 80px;
+    width: 800px;
+    float: right;
+
+}
+
+
+
+div#use-gnb ul.menu{
+    width: 124px;
+    float: left;
+    margin-right: 70px;
+}
+
+div#use-gnb ul li{
+
+    box-sizing: border-box;
+
+    margin-top: 20px;
+    
+}
+
+div#use-gnb ul li a{
+
+    box-sizing: border-box;
+    
+
+    padding:10px
+    
+}
+
+div#use-gnb li:not(.mouse){
+
+    display: none;
+}

@@ -1,0 +1,169 @@
+@charset "utf-8";
+
+/*회원가입*/
+
+div#all-wrap{
+
+    width: 1500px;
+    height: 1500px;
+    margin: 0 auto;
+    
+}
+div#content-wrap{
+    padding-top: 137px;
+    width: 1300px;
+    height: auto;
+    margin: 20px auto;
+    display: inline-block;
+    
+}
+
+
+
+ul#main{
+
+    padding: initial;
+
+}
+li#home{
+
+    padding: initial;
+
+}
+
+
+nav {
+
+    width: 230px;
+    float: left;
+    z-index: 0;
+    margin-top: 90px;
+
+}
+
+nav h1{
+
+    text-align: center;
+    margin-bottom: 30px;
+   
+
+}
+
+nav ul li{
+
+    width: 230px;
+    height: 50px;
+    box-sizing: border-box;
+    padding: 10px;
+    border-bottom: 1px solid #2a2a2a ;
+  
+    background-color: white;
+    
+
+}
+
+
+
+nav ul li:nth-child(3){
+
+    font-weight: normal;
+    border-top: 5px solid#2a2a2a;
+    background-color: #8b6d49;
+   
+
+
+}
+
+nav ul li a{
+
+    font-weight: normal;
+    color: #2a2a2a;
+}
+
+
+
+section{
+
+    width: 78%;
+    float: left;
+    margin-top: 90px;
+    margin-left: 50px;
+    
+}
+
+
+section h2{
+
+    margin-bottom: 30px;
+}
+
+section h3{
+
+    text-align: center;
+}
+
+section h4{
+    text-align: center;
+}
+
+section article.agree-service{
+    border: 1px solid #2a2a2a;
+    width: 97%;
+    margin: 20px;
+    
+    
+}
+
+section > article.join-choice-window:nth-child(2){
+    margin: initial;
+    
+    
+}
+
+
+div.service-using-frame{
+
+    width: 97%;
+    height: 192px;
+    overflow: auto;
+    word-break: break-all;
+
+}
+
+div.service-using-frame p{
+
+    width: 97%;
+    height: 192px;
+    white-space: pre-line;
+    word-break: break-all;
+
+}
+
+input[type="checkbox"]{
+    width: 20px;
+    height: 20px;
+    margin-left:20px;
+
+}
+
+label{
+    vertical-align: top;
+
+}
+
+div#btns-wrap{
+    width: fit-content;
+    height: 200px;
+    box-sizing: border-box;
+    padding-top: 50px;
+    margin: 0 auto;
+
+}
+
+input.agree-btns{
+    width: 150px;
+    height: 50px;
+    margin-top: 30px;
+    
+
+}

@@ -1,0 +1,42 @@
+
+/*reset*/
+@charset "utf-8";
+*{margin: 0; padding: 0;}
+ol,ul,li{list-style: none;}
+a{outline: 0; text-decoration: none; color: #555;  cursor: pointer;}
+img{border:0; vertical-align: top;}
+body{font:12px/1.6;font-family: 'Noto Sans KR', sans-serif;;
+    color: #555; }
+
+
+
+div#member-gnb{
+    
+    float: right;
+    margin : 15px 60px 8px 30px;
+}
+
+
+ul#member li{
+
+    float: left;
+    margin:0 10px 0 10px;
+    
+}
+
+ul#member li::before{
+
+    content: "|";
+
+}
+
+
+ul#member li a{
+
+    box-sizing: border-box;
+    padding: 20px;
+
+}
+
+
+

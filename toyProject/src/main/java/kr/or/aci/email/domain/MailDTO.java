@@ -34,7 +34,7 @@ public class MailDTO {
 	
 	private String emailName;
 	
-	private int emailKey;
+	private String emailKey;
 	
 	
 	

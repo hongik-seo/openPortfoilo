@@ -32,7 +32,7 @@ public class IsStatusDAO {
 	}
 	
 	
-	public void myPage(Map<String,Object> map) {
+	public void update(Map<String,Object> map) {
 		
 		
 		

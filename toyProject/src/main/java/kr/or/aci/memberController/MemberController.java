@@ -151,7 +151,7 @@ public class MemberController {
 		
 		System.out.println(mailDTO);
 		
-		mav.addObject("member", mailDTO);
+		mav.addObject("mailDTO", mailDTO);
 		mav.setViewName("/member/inputUserInfo");
 		return mav;
 	}
@@ -193,7 +193,6 @@ public class MemberController {
 	
 	
 	@GetMapping("/login")
-	
 	public String loginView() {
 		
 		
@@ -205,14 +204,14 @@ public class MemberController {
 	
 	@PostMapping(value="/loginMap")
 	@ResponseBody
-	public JoinDTO login(@RequestBody Map<String,Object> frm,HttpServletResponse response){
+	public Map<String,Object> login(@RequestBody Map<String,Object> frm,HttpServletResponse response){
 		
 		JoinDTO	login=null;
 		
+		Map<String,Object> map=new HashMap<String, Object>();
+		
 		try {
 			login=joinDAO.loginSelect(frm);
-			
-			System.out.println("login:::::::::::::::::::"+login);
 			
 			
 			if(login!=null) {
@@ -225,11 +224,15 @@ public class MemberController {
 				
 				response.addCookie(loginCookie); 
 				
-				return login;
+				System.out.println(login);
+				
+				
+				map.put("login", login);
+				
+				return map;
 
 			}
 			
-			return login;
 		
 			
 		} catch (Exception e) {
@@ -237,9 +240,8 @@ public class MemberController {
 			e.getStackTrace();
 		}
 		
-		
-	
-		return login;
+		map.put("login", login);
+		return map;
 	}
 	
 	@GetMapping("/logout")
@@ -258,8 +260,8 @@ public class MemberController {
 		
 	}
 	
-	@GetMapping("/mypage")
-	public ModelAndView mypageFront(@CookieValue(value = "loginCookie", required = false) Cookie loginCookie ,RedirectAttributes rttr) {
+	@GetMapping("/selectMyMember")
+	public ModelAndView mypageFront(@CookieValue(value = "loginCookie", required = false) Cookie loginCookie ) {
 		
 		ModelAndView mav=new ModelAndView();
 		
@@ -271,12 +273,117 @@ public class MemberController {
 		
 		mav.addObject("myPageDTO", myPageDTO);
 		
-		mav.setViewName("/member/mypage");
+		mav.setViewName("/member/showMyInfo");
 		
 		
 		return mav;
 	}
 	
+	
+	@GetMapping("/updateMyPage")
+	public String updateMyPage(@CookieValue(value = "loginCookie", required = false) Cookie loginCookie,Model model) {
 
+		
+		String cookId=loginCookie.getValue();
+		
+		int id=Integer.parseInt(cookId);
+		
+		JoinDTO myPageDTO=joinDAO.myPageSelect(id);
+		
+		model.addAttribute("myPageDTO",myPageDTO);
+		
+		
+		return "/member/inputUserInfo";
+	}
+
+	
+	@PostMapping("/updateMyMember")
+	public String myPageUpdate(@CookieValue(value = "loginCookie", required = false) 
+	Cookie loginCookie,@ModelAttribute("JoinDTO") JoinDTO myPageDTO,
+	HttpServletResponse response,
+	Model model
+			) {
+		
+		
+		Timestamp isUpdateDate =Timestamp.valueOf(LocalDateTime.now());
+		Map<String, Object> map=new HashMap<String, Object>();
+		
+		System.out.println(myPageDTO);
+		
+		map.put("id", loginCookie.getValue());
+		
+		map.put("isUpdateDate", isUpdateDate);
+		
+		
+		System.out.println("useYN::::::::::::::" + myPageDTO.getJoinUseYN());
+		
+
+		
+		if(myPageDTO.getJoinUseYN().equals("Y")) {
+		
+			isDAO.update(map);
+		
+		
+		}else if(myPageDTO.getJoinUseYN().equals("N")) {
+			
+			
+			isDAO.delete(map);
+			
+			loginCookie.setMaxAge(0);
+			
+			loginCookie.setPath("/"); 
+				
+				// 쿠키를 유지할 시간 설정(단위 : 초) 
+				 // 30일 동안 쿠키 유지. 
+				
+			response.addCookie(loginCookie); 
+		
+			
+		}
+
+		
+		joinDAO.myPageUpdate(myPageDTO);
+
+		return "redirect:/main";
+		
+	}
+	
+	
+	@GetMapping("/idPwdfind")
+	public String idPwdfind() {
+		
+		
+		
+		return "/member/idPwdFind";
+	}
+	
+	@PostMapping("/idPwdfindIsPresent")
+	@ResponseBody
+	public Map<String,Object> idPwdfindIsPresent(@RequestBody Map<String,Object> map) {
+		
+		Map<String,Object> findMap=new HashMap<String, Object>();
+		JoinDTO find=null;
+
+			System.out.println("find::::::::::::::"+map);
+		
+		try {
+
+			find=joinDAO.idPwdFind(map);
+
+			findMap.put("find", find);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+		findMap.put("find", find);
+
+		return findMap;
+	}
+	
+	
+	
+	
+	
+	
 
 }

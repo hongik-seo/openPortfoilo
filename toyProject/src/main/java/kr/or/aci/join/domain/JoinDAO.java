@@ -37,5 +37,22 @@ public class JoinDAO {
 		return sqlsession.selectOne("myPageSelect",id);
 	}
 			
+	public int myPageUpdate(JoinDTO mypageDTO) {
+		
+		
+		return sqlsession.update("myPageUpdate",mypageDTO);
+	}
+	
+	public JoinDTO idPwdFind(Map<String,Object> map) {
+		
+		
+		
+		
+		
+		return sqlsession.selectOne("idPwdFind",map);
+			
+	}
+	
+	
 	
 }

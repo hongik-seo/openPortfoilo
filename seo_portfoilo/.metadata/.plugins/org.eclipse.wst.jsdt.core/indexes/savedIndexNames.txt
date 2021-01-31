@@ -1,9 +1,0 @@
-INDEX VERSION 1.4+D:\seo_portfoilo\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-92300616.index
-3500865526.index
-653089213.index
-373218865.index
-3955771097.index
-1656394060.index
-569935158.index
-3794914674.index

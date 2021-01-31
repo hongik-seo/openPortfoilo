@@ -45,16 +45,17 @@
         	    	
         	    	console.log(data);
         	    	
-        	    	if(data==null){
+        	    	if(data.login==null){
         	    		
         	    		alert("로그인 정보가 올바르지 않습니다.");
         	    		
+        	    		return false;
         	    	}else{
         	    		
         	    	
         	    		alert("다음페이지로 이동합니다.");
         	    		location.href="/main"
-                	    	
+                	    return true;
         	    		
         	    	}
         	    	

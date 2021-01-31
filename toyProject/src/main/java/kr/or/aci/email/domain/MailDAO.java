@@ -44,4 +44,11 @@ public class MailDAO {
 		
 	}
 	
+	public String allPwdSendMember(Map<String,Object> map){
+		
+		
+		return sqlSession.selectOne("allPwdSendMember",map);
+		
+	}
+	
 }

@@ -9,12 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DBManager{
-  private static String url = "jdbc:oracle:thin:@localhost:1521:XE";
-
-  private static String uid = "gd25th08";
-
-  private static String pwd = "gd1234";
-
+  
   public static Connection getConnection(){
     Connection conn = null;
     try {

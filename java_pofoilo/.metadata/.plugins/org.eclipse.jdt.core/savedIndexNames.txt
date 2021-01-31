@@ -1,4 +1,0 @@
-INDEX VERSION 1.131+C:\Users\gd6\Desktop\Java BankingSystem\.metadata\.plugins\org.eclipse.jdt.core
-3996102163.index
-3729101479.index
-2639603530.index

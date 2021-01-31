@@ -21,7 +21,7 @@
 	<select id="loginSelect" resultType="JoinDTO" parameterType="java.util.HashMap">
 	
 	
-	 SELECT * From member where joinId=#{id} AND joinPassword=#{pwd} 
+	 SELECT * From member where joinId=#{id} AND joinPassword=#{pwd}  AND joinUseYN='Y'
 	
 	
 	</select>
@@ -36,11 +36,51 @@
 	
 	</select>
 	
+	<update id="myPageUpdate"  parameterType="JoinDTO">
 	
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+    	   SELECT id FROM member where joinId=#{joinId} 
+	   </selectKey>
+		
+		update member set
+		
+		<if test='joinUseYN =="Y"'>
+		
+		 joinPassword=#{joinPassword} , joinPasswordConfirm =#{joinPasswordConfirm} , joinBirthday=#{joinBirthday} , joinPhoneNumber =#{joinPhoneNumber} , joinZipCode =#{joinZipCode} , joinAddress =#{joinAddress} , joinAddressDetail =#{joinAddressDetail} , joinAddressAppendix =#{joinAddressAppendix} , joinNewsletter =#{joinNewsletter} , joinUseYN =#{joinUseYN} , joinEmail =#{joinEmail}
+		
+		</if>
 	
+		<if test='joinUseYN =="N"'>
+		
+		  joinUseYN=#{joinUseYN} 
 	
+		</if>
 	
+		<where>
+		
+			id=#{id}
+		
+		</where>
 	
+	</update>
+	
+	<select id="idPwdFind" resultType="JoinDTO" parameterType="java.util.HashMap">
+	
+		<if test='flag=="idFind"'>
+	
+			select joinId from member where joinName=#{name} AND joinEmail=#{email}  AND joinUseYN ='Y'
+	
+		</if>
+	
+		<if test='flag=="pwdFind"'>
+	
+			select REGEXP_REPLACE(joinPassword,'[0-9]','*') as joinPassword  from member where joinName=#{name} AND joinEmail=#{email} AND joinId=#{id} AND joinUseYN ='Y'
+	
+		</if>
+	
+		
+	
+	</select>
 	
 
 </mapper>

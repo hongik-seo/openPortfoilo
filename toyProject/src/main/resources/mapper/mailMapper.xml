@@ -15,14 +15,19 @@
 	
 		<selectKey keyProperty="id" resultType="int" order="BEFORE">
     	   SELECT id FROM email where mailTo =#{mailTo} AND emailKey=#{emailKey}
-	   </selectKey>
+	   	</selectKey>
 
 	
 			update email set getDate=#{getDate} where id=#{id} AND emailKey=#{emailKey} 
 	
 	</update>
 	
+	<select id="allPwdSendMember" resultType="String" parameterType="java.util.HashMap">
 	
+	
+			SELECT m.joinPassword FROM member as m JOIN email as e ON m.id=e.id where m.joinName=#{name} AND m.joinId=#{id} AND m.joinEmail=#{email}
+	
+	</select>
 	
 	
 </mapper>

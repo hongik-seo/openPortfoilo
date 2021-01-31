@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
+<c:set var="joinDTO" value="${joinDTO}"/>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -92,7 +93,26 @@
          	
          	
          })
-         </script>
+</script>
+
+<script type="text/javascript">
+
+	$(function(){
+		
+		$("a").click(function(){
+			
+			
+			$(this).css("color","red");
+			
+		})
+		
+		
+	})
+
+	
+
+
+</script>
 
 </head>
 
@@ -111,17 +131,20 @@
                 <ul id="member">   
                     
                     <c:choose>
-                    <c:when test="${empty cookie.loginCookie}">
+                    <c:when test="${empty cookie.loginCookie}"> 
                     <li><a href="/member/login">로그인</a></li>
                    	<li><a href="/member/agree">회원가입</a></li>
+                   	<li><a href="/member/idPwdfind">아이디*비밀번호찾기</a></li>
+                   	
                     <li><a>ENG</a></li>
                     
                     </c:when>
                     <c:otherwise>
                     <li ><a id="logout" href="/member/logout">로그아웃</a></li>
                     <li><a>애매내역</a></li>
-                    <li><a href="/member/mypage">마이페이지</a></li>
-                   
+                    <li><a href="/member/selectMyMember">마이페이지</a></li>
+                    
+                   	
                     </c:otherwise>
                    </c:choose>
                   
@@ -138,7 +161,7 @@
     
                 <ul id="performence-tiketting" class="menu">
                     <strong>
-                        <li class="mouse"><a >공연안내*예매</a></li>
+                    <li class="mouse"><a>공연안내*예매</a></li>
                     </strong>
                     <li><a>공연 일정</a></li>
                     <li><a>좌석안내</a></li>

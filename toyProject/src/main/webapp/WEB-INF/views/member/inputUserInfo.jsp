@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:set var="member" value="${member}" />
+<c:set var="mailDTO" value="${mailDTO}" />
+<c:set var="myPageDTO" value="${myPageDTO}"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -104,7 +105,21 @@ $(function() {
 	  this.value = autoHypenPhone( this.value ) ;  
 	}
 
-	 
+	var flag=$("input[name='flag']").val();
+	
+	
+	alert(flag)
+	
+	if(flag=="join"){
+				
+		$("#joinFrm").attr("action","/member/memberBefore")
+		$("#joinFrm").attr("method","POST")
+	}else if(flag=="modify"){
+		
+		$("#joinFrm").attr("action","/member/updateMyMember")
+		$("#joinFrm").attr("method","POST")
+		
+	}
 	
 	
 	
@@ -142,7 +157,7 @@ $(function() {
 			
 			if(!name.replace(empReg,"") || !id.replace(empReg,"") || !password.replace(empReg,"") || 
 					!passwordConfirm.replace(empReg,"") || !phoneNumber.replace(empReg,"") || !zipCode.replace(empReg,"") || !address.replace(empReg,"")
-						|| !addressDetail.replace(empReg,"") || !addressApendix.replace(empReg,"")){
+						|| !addressDetail.replace(empReg,"") || !addressAppendix.replace(empReg,"")){
 				
 				
 				alert("공백을 제거해주세요")
@@ -164,7 +179,6 @@ $(function() {
 			}
 			
 			
-		
 		
 		
 		  
@@ -211,7 +225,8 @@ $(function() {
             <article class="agree-service">
                 <img src="${root}/resources/images/end_step3.png">
              </article>
-       <form id="joinFrm" action="/member/memberBefore" method="POST" >
+       
+       <form id="joinFrm" >
             <article class="join-choice-input">
                 <h3>회원 정보 입력 <span id="must-input">* 필수입력사항</span></h3> 
               
@@ -225,7 +240,7 @@ $(function() {
                         </td>
                         <td>
 
-                            <input type="text" id="joinName" name="joinName" value="${member.emailName}" readonly="readonly">
+                            <input type="text" id="joinName" name="joinName" <c:if test='${!empty mailDTO}'> value="${mailDTO.emailName}"</c:if>  <c:if test='${!empty myPageDTO}'> value="${myPageDTO.joinName}"</c:if>readonly="readonly">
                             <p class="member-red-info"></p>
                         </td>
 
@@ -240,7 +255,7 @@ $(function() {
                         </td>
                         <td>
 
-                            <input type="text" id="joinId" name="joinId">
+                            <input type="text" id="joinId" <c:if test='${!empty myPageDTO}'> value="${myPageDTO.joinId}" readonly='readonly'</c:if> name="joinId">
                             <p class="member-red-info"></p>
                         </td>
                     </tr>
@@ -308,7 +323,7 @@ $(function() {
                         </td>
                         <td>
                             
-                            <input type="email" id="email" name="joinEmail" value="${member.mailTo}" readonly="readonly">
+                            <input type="email" id="email" name="joinEmail" <c:if test='${!empty mailDTO}'> value="${mailDTO.mailTo}" readonly='readonly' </c:if>>
                             <p class="member-red-info"></p>
                         
                         </td>
@@ -343,26 +358,37 @@ $(function() {
                         </td>
                         <td>
                            
-                        동의 <input type="checkbox" id="sending-agree" name="joinNewsletter" class="not-mendatory" value='Y' >
-                        반대 <input type="checkbox" id="sending-disagree" name="joinNewsletter" class="not-mendatory" value='N'>
+                        동의 <input type="radio" id="sending-agree" name="joinNewsletter" class="not-mendatory" value='Y' >
+                        반대 <input type="radio" id="sending-disagree" name="joinNewsletter" class="not-mendatory" value='N'>
                         
                         </td>
                     </tr>
                 </table>
                
+               	<c:if test="${!empty mailDTO}">
+					<input type="hidden" name="flag" value="join">
+				</c:if>	
+			
+				<c:if test="${!empty myPageDTO}">
+					<input type="hidden" name="flag" value="modify">
+				</c:if>
+               
 
                     <div id="btns-wrap">  
-
+						<input type='hidden' name='joinUseYN' value='Y' />
                         <input type="reset"  class="join-btns" value="취소">
                         <input type="submit" class="join-btns" value="확인">
                         
                     </div>
  			
-
+ 		
+			
+					
             
 
             </article>
 	</form>
+	
             <article class="join-choice-input">
                
                

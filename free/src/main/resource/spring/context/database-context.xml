@@ -12,56 +12,7 @@
             http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd"
             >
 
-	<!-- dataSource -->
-	<bean id="dataSourceSpied" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
-		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
-		<property name="username" value="SEO" />
-		<property name="password" value="hongik" />
-	</bean>
-
-	<bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
-		<constructor-arg ref="dataSourceSpied" />
-		<property name="logFormatter">
-			<bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
-				<property name="loggingType" value="MULTI_LINE" />
-				<property name="sqlPrefix" value="SQL : " />
-			</bean>
-		</property>
-	</bean>
-
-<!-- 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> -->
-<!-- 		<property name="driverClassName" value="com.mysql.jdbc.Driver" /> -->
-<!-- 		<property name="url" value="jdbc:mysql://localhost:3306/mavenboard" /> -->
-<!-- 		<property name="username" value="mavenuser" /> -->
-<!-- 		<property name="password" value="mavenuser" /> -->
-<!-- 	</bean> -->
-
-	<!-- mybatis connect -->
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" >
-		<property name="dataSource" ref="dataSource" />
-		<property name="mapperLocations" value="classpath*:ino/**/*Mapper.xml" />
-		<property name="configLocation" value="classpath:/spring/mybatis/sqlMapConfig.xml" />
-		<!-- <property name="configLocation" value="sqlMapConfig.xml" /> -->
-	</bean>
-	
-	
-	
-
-	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate"  destroy-method="close">
-		<constructor-arg index="0" ref="sqlSessionFactory" />
-	</bean>
-
-	<!-- <bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean"> -->
-	<!-- <property name="mapperInterface" value="ino.web.freeBoard.mapper.FreeBoardMapper"
-		/> -->
-	<!-- <property name="sqlSessionFactory" ref="sqlSessionFactory" /> -->
-	<!-- </bean> -->
-	
-		<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" >
-	
-		<property name="dataSource" ref="dataSource"></property>
-	</bean>
+	<!--freeboard-->
 
 	
 

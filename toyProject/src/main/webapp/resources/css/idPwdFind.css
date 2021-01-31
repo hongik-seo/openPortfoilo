@@ -159,14 +159,14 @@ section article{
     
 }
 
-div#login-window{
+div.login-window{
     width: 340px;
     height: 467px;
     margin: 0 auto;
     
 }
 
-div#login-window > img{
+div.login-window > img{
 
     margin-bottom: 40px;
     

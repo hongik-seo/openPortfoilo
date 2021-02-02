@@ -4,26 +4,25 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../js/jquery-3.1.1.min.js"></script>
-    <script src="../js/jquery-ui.min.js"></script>
-    <script src="../js/jquery.easing.1.3.js"></script>
-    <script src="../js/jquery.mousewheel.min.js"></script>
-    <link rel="stylesheet"  type="text/css" href="../css/common.css"> 
-    <link rel="stylesheet"  type="text/css" href="../css/questing.css"> 
+    <script src="${root}/resources/js/jquery-3.1.1.min.js"></script>
+    <script src="${root}/resources/js/jquery-ui.min.js"></script>
+    <script src="${root}/resources/js/jquery.easing.1.3.js"></script>
+    <script src="${root}/resources/js/jquery.mousewheel.min.js"></script>
+    <link rel="stylesheet"  type="text/css" href="${root}/resources/css/common.css"> 
+    <link rel="stylesheet"  type="text/css" href="${root}/resources/css/questing.css"> 
 
-    <title>ìì£¼íë ì§ë¬¸</title>
-<script>
+    <title>자주하는 질문</title>
+	<script>
     $(function(){
 
 
-        $(".menu").each(function(i){
+        $(".q").each(function(i){
 
-            $($(".menu :odd").eq(i)).hover(function(){
+            $($(".q :odd").eq(i)).click(function(){
 
                 $($(".even-box").eq(i)).toggle();
-
+				$(this).css("color","red");
 
             })
 
@@ -33,85 +32,93 @@
     });
 
 
-</script>   
+	</script>   
+	
+	<script type="text/javascript">
+	
+	$(function(){
+		
+		$("a.on").each(function(i){
+			
+			
+			$($("a.on").eq(i)).click(function(){
+				
+				var on=i.toString();
+				
+				$(this).wrap("<form id='freqencyFrm' action='/board/questingView' method='get'>'<input type='hidden' name='on' value="+on+" >'</from>")
+				
+				
+				$("#freqencyFrm").submit();
+				
+				
+				
+				
+			})
+			
+		})
+		
+		
+	})
+	
+	</script>
 
 </head>
 
-<body>
-<div id="all-wrap">
-    <!--ì½íì¸  -->
-    <div id="content-wrap">
-        <nav>
-            <h1>ì»¤ë®¤ëí°</h1>
+<%@ include file="/WEB-INF/views/include/header.jsp" %>   
+
+		 <nav>
+            <h1>커뮤니티</h1>
             <ul id="member-tab">
-                <li><a>ê³µì§ì¬í­</a></li>
-                <li id="click-menu"><a>ìì£¼íë ì§ë¬¸</a></li>
-                <li><a>ìì ê²ìí</a></li>
+                <li><a>공지사항</a></li>
+                <li id="click-menu"><a>자주하는 질문</a></li>
+                <li><a>자유게시판</a></li>
             </ul>
         </nav>
 
-      <div id="community-wrap">
+    <section id="community-wrap">
     
-                <h2>ìì£¼íë ì§ë¬¸</h2>
+                <h2>자주하는 질문</h2>
             
             <ul id="btn-list">
                 <li>
-
-                    <input type="button" name="all" value="ì ì²´" />
-
-                </li>
-
-                <li>
-
-                    <input type="button" value="ê³µì°ìë´ ë° ìë§¤" />
+					
+                    <a class="on">전체</a>
 
                 </li>
 
                 <li>
-
-                    <input type="button" value="ëê´" />
+                    <a class="on">공연안내*예매</a>
+                   
 
                 </li>
 
                 <li>
+                     <a class="on">대관</a>   
+                    
 
-                    <input type="button" value="ê¸°í" />
+                </li>
+
+                <li>
+                    <a class="on">기타</a>
+                   
 
                 </li>
 
             </ul>
-       
+
+    </section>
+    <article id="qn">
            
+           <c:forEach var="freqList" items="${freqList}">
             <ul id="qn-list">
                     <li class="questing-odd qli">
                         <div class="odd-box">
                             <ul class="box-list">
-                                <li class="menu">
-                                   <a > ê³µì°ìë´.</a>
+                                <li class="q">
+                                   <a>Q ${freqList.boardStatus}</a>
                                 </li>
-                                <li class="menu">
-                                  <a> ê³µì°ì ë³´ë¥¼ ìê³  ì¶ìµëë¤. </a>
-
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="questing-even qli">
-                        <div class="even-box">
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                        </div>
-                    </li>
-
-
-                    <li class="questing-odd qli">
-                        <div class="odd-box">
-                            <ul class="box-list">
-                                <li class="menu">
-                                   <a > ê³µì°ìë´.</a>
-                                </li>
-                                <li class="menu">
-                                  <a> ê³µì°ì ë³´ë¥¼ ìê³  ì¶ìµëë¤. </a>
+                                <li class="q">
+                                  <p class="subject"> ${freqList.boardSubject } </p>
 
                                 </li>
                             </ul>
@@ -119,39 +126,15 @@
                     </li>
 
                     <li class="questing-even qli">
-                        <div class="even-box">
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                        
+                        <div class="even-box" style="clear:both;">
+                           A ${freqList.boardContent }
                         </div>
-                    </li>
-
-
-                    <li class="questing-odd qli">
-                        <div class="odd-box">
-                            <ul class="box-list">
-                                <li class="menu">
-                                   <a > ê³µì°ìë´.</a>
-                                </li>
-                                <li class="menu">
-                                  <a> ê³µì°ì ë³´ë¥¼ ìê³  ì¶ìµëë¤. </a>
-
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="questing-even qli">
-                        <div class="even-box">
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                        </div>
-                    </li>
-
-            
-            </ul>
-    
-        </div>
-    </div>
+                    </li> 
+            	</ul>
+            </c:forEach>
+    </article>
+        
 </div>
 
-</body>
-
-</html>
+<%@ include file="/WEB-INF/views/include/footer.jsp" %>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.aci.mapper.boardMapper">
+
+
+	<insert id="insertFrequncy" parameterType="java.util.List">
+	
+	INSERT into board  (boardKind,boardSubject,boardContent,boardWriter) values
+	
+			<foreach collection="list" item="item" separator="," >
+			
+				
+				 (#{item.boardKind},#{item.boardSubject},#{item.boardContent},#{item.boardWriter})
+	
+			</foreach>
+	</insert>
+
+	<select id="selectFrequncy" resultType="BoardDTO"   parameterType="java.lang.String" >
+	
+		SELECT boardSubject, boardContent, (CASE boardKind WHEN 1 THEN '공연안내*예매' WHEN 2 THEN '대관' WHEN 3 THEN '기타' END)
+		
+		as boardStatus from board 
+		
+		
+		<if test='on == "0"'>
+		where 1=1
+		</if>
+		
+		<if test='on != "0"'>
+		 where boardKind=#{on}
+		</if>
+	
+	
+	
+	</select>
+
+
+
+</mapper>

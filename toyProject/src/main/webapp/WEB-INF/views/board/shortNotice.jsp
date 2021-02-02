@@ -4,56 +4,51 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet"  type="text/css" href="../css/common.css"> 
-    <link rel="stylesheet"  type="text/css" href="../css/shortNotice.css"> 
+    <link rel="stylesheet"  type="text/css" href="${root}/resources/css/common.css"> 
+    <link rel="stylesheet"  type="text/css" href="${root}/resources/css/shortNotice.css"> 
 
-    <title>ê³µì§ì¬í­</title>
+    <title>공지사항</title>
 
 
 </head>
 
-<body>
-    <div id="all-wrap">
-        <!--ì½íì¸  -->
-        <div id="content-wrap">
-        <nav>
-                <h1>ì»¤ë®¤ëí°</h1>
+    <nav>
+                <h1>커뮤니티</h1>
                 <ul id="member-tab">
-                    <li ><a>ê³µì§ì¬í­</a></li>
-                    <li ><a>ìì£¼íë ì§ë¬¸</a></li>
-                    <li id="click-menu"><a>ìì ê²ìí</a></li>
+                    <li ><a>공지사항</a></li>
+                    <li ><a>자주하는 질문</a></li>
+                    <li id="click-menu"><a>자유게시판</a></li>
                 </ul>
         </nav>
         
 
         <div id="community-wrap">
 
-            <h2>ê³µì§ì¬í­</h2>
+            <h2>공지사항</h2>
             <table id="community-table" border="1">
 
                 <thead>
                     
                         <td>
-                            ë²í¸
+                            번호
 
                         </td>
                         <td id="subject">
-                            ì ëª©
+                            제목
                             
                         </td>
                         <td>
 
-                            ì²¨ë¶
+                            첨부
                         </td>
                         <td>
 
-                            ë±ë¡ì¼
+                            등록일
                         </td>
 
                         <td>
-                            ì¡°íì
+                            조회수
                         </td>
 
                     
@@ -63,26 +58,26 @@
                 <tbody>
                     <tr>
                         <td>
-                            ììê°
+                            임의값
 
                         </td>
                         <td>
-                            ììê°
-
-                        </td>
-
-                        <td>
-                            ììê°
+                            임의값
 
                         </td>
 
                         <td>
-                            ììê°
+                            임의값
 
                         </td>
 
                         <td>
-                            ììê°
+                            임의값
+
+                        </td>
+
+                        <td>
+                            임의값
 
                         </td>
 
@@ -97,11 +92,5 @@
         </div>
 
 
-        </div>
-        <!--//ì½íì¸ -->    
-    
-</div>
-
-
-</body>
-</html>
+  </div>
+        <!--//콘텐츠-->    

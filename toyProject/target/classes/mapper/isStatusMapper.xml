@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.aci.mapper.isStatusMapper">
+
+	<insert id="join" parameterType="java.util.HashMap">
+	
+	
+		insert Into isstatus (isCurrentStatus,isJoinDate,isMemberId) values(#{isCurrentStatus},#{isJoinDate},#{isMemberId})
+	
+	
+	</insert>
+	
+	<update id="myPage" parameterType="java.util.HashMap" >
+	
+		update isstatus set isUpdateDate=#{isUpdateDate} 
+		
+		<where>
+				id=#{id}
+		</where>
+	</update>
+	
+	
+	<update id="delete" parameterType="java.util.HashMap" >
+	
+		update isstatus set isDeleteDate=#{isUpdateDate} 
+		
+		<where>
+				id=#{id}
+		</where>
+	</update>
+
+
+</mapper>

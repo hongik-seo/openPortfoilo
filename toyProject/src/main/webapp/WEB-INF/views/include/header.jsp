@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
-<c:set var="joinDTO" value="${joinDTO}"/>
+
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -72,7 +73,7 @@
          
          $(function(){
 
-         	$("#logout").click(function(){
+         	$(".logout").click(function(){
          		
          		
          	var result=confirm("로그아웃 하시겠습니까")
@@ -104,6 +105,7 @@
 			
 			$(this).css("color","red");
 			
+			
 		})
 		
 		
@@ -131,24 +133,28 @@
                 <ul id="member">   
                     
                     <c:choose>
-                    <c:when test="${empty cookie.loginCookie}"> 
+                    <c:when test="${empty loginCookie}"> 
                     <li><a href="/member/login">로그인</a></li>
                    	<li><a href="/member/agree">회원가입</a></li>
                    	<li><a href="/member/idPwdfind">아이디*비밀번호찾기</a></li>
-                   	
-                    <li><a>ENG</a></li>
-                    
+                                        
                     </c:when>
                     <c:otherwise>
-                    <li ><a id="logout" href="/member/logout">로그아웃</a></li>
+                    <li ><a class="logout" href="/member/logout">로그아웃</a></li>
                     <li><a>애매내역</a></li>
                     <li><a href="/member/selectMyMember">마이페이지</a></li>
-                    
-                   	
                     </c:otherwise>
                    </c:choose>
-                  
-                  
+                   
+                  <c:choose>
+                   <c:when test="${empty adminSession}">
+                   	<li><a href="/admin/adminLogin">관리자 페이지 로그인</a></li>
+                  	</c:when>
+                  	<c:otherwise >
+                  	<li><a class="logout" href="/admin/adminLogout">관리자 페이지 로그아웃</a></li>
+                  	</c:otherwise>
+                  </c:choose>	
+                  	
                     <li><a><img src="${root}/resources/images/main_gnb_top_schedule.png"></a></li>
                     <li><a><img src="${root}/resources/images/main_gnb_top_info.png"></a></li>
                 </ul>
@@ -194,8 +200,12 @@
                         <li class="mouse"><a>커뮤니티 </a></li>
                     </strong>
                     <li><a>공지사항 </a></li>
-                    <li><a>자주하는 질문</a></li>
+                    <li><a href="/board/questingView">자주하는 질문</a></li>
                     <li><a>QNA</a></li>
+                    <c:if test="${adminSession eq 'pageAdmin'}">
+                    <li><a href="/board/adminChoice">관리자 글쓰기</a></li>
+                    </c:if>
+                    
                 </ul>
             </div>
             <!--//gnb-->

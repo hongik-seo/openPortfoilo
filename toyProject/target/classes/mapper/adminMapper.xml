@@ -5,16 +5,12 @@
 <mapper namespace="kr.or.aci.mapper.adminMapper">
 
 
-	<select id="sortLoginAdmin" resultType="AdminDTO" parameterType="java.util.HashMap">
+	<select id="adminLogin" resultType="AdminDTO" parameterType="java.util.HashMap">
 	
 	
-		SELECT 
+		SELECT (CASE adminPart WHEN 0 THEN 'pageAdmin' WHEN 1 THEN 'ticketAdmin' END) AS adminStatus 
 		
-		(CASE adminPart WHEN 0 THEN 'pageAdmin' WHEN 1 THEN 'ticketAdmin' END) AS adminStatus
-		
-		
-		from admin where adminId=#{id} AND adminPassword=#{pwd} AND adminUseYN ='Y'
-	
+		FROM ADMIN WHERE adminId=#{id} AND adminPassword=#{pwd} AND adminUseYN ='Y'
 	
 	</select>
 

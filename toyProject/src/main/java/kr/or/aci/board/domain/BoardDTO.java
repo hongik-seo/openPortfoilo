@@ -32,13 +32,13 @@ public class BoardDTO {
 	
 	private int boardHitNumber; //int 
 	
-	private String boardFileLocation; //varchar(400)
+	private String boardOriFileName; //varchar(400)
 	
 	private Timestamp boardWriterDate; //date 
 	
 	private Timestamp boardUpdateDate; //date 
 	
-	private Timestamp boardDelectDate; //date 
+	private Timestamp boardDeleteDate; //date 
 
 	private String boardStatus;
 	

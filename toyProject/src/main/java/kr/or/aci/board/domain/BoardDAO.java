@@ -14,19 +14,26 @@ public class BoardDAO {
 	private SqlSessionTemplate sqlSession;
 	
 	
-	public int insertFrequncy(List<Map<String,Object>> list) {
+	public int insertBoard(List<Map<String,Object>> list) {
 		
 		
 		
-		return sqlSession.insert("insertFrequncy",list);
+		return sqlSession.insert("insertBoard",list);
 	}
 
 	
-	public List<BoardDTO> selectFrequncy(String on) {
+	public List<BoardDTO> selectBoard(String on) {
 		
 		
-		return sqlSession.selectList("selectFrequncy", on);
+		return sqlSession.selectList("selectBoard", on);
 		
+	}
+	
+	
+	public int updateBoard(Map<String,Object> map) {
+		
+		
+		return sqlSession.update("updateBoard",map);
 	}
 	
 	

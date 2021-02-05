@@ -54,7 +54,7 @@
             <table id="community-table" border="1">
 
                 <thead>
-
+					<tr>
                         <td>
 
                             작성자
@@ -82,7 +82,7 @@
                             조회수
                         </td>
 
-                    
+                    </tr>
 
                 </thead>
 
@@ -103,7 +103,7 @@
                         </td>
 
                         <td>
-                            임의값
+                            ${fileDB}
 
                         </td>
 

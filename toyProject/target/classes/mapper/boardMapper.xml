@@ -5,21 +5,23 @@
 <mapper namespace="kr.or.aci.mapper.boardMapper">
 
 
-	<insert id="insertFrequncy" parameterType="java.util.List">
+	<insert id="insertBoard" parameterType="java.util.List">
 	
-	INSERT into board  (boardKind,boardSubject,boardContent,boardWriter) values
+	INSERT into board  (boardKind,boardSubject,boardContent,boardWriter,boardOriFileName) values
 	
+	
+		
 			<foreach collection="list" item="item" separator="," >
-			
-				
-				 (#{item.boardKind},#{item.boardSubject},#{item.boardContent},#{item.boardWriter})
-	
+				<if test="item.boardKind !=null or item.boardSubject !='' ">
+					 (#{item.boardKind},#{item.boardSubject},#{item.boardContent},#{item.boardWriter},#{item.boardOriFileName})
+				</if>
 			</foreach>
+	
 	</insert>
 
-	<select id="selectFrequncy" resultType="BoardDTO"   parameterType="java.lang.String" >
+	<select id="selectBoard" resultType="BoardDTO"   parameterType="java.lang.String" >
 	
-		SELECT boardSubject, boardContent, (CASE boardKind WHEN 1 THEN '공연안내*예매' WHEN 2 THEN '대관' WHEN 3 THEN '기타' END)
+		SELECT boardKind,boardSubject, boardContent, (CASE boardKind WHEN '01' THEN '공연안내 및 예매' WHEN '02' THEN '대관' WHEN '03' THEN '기타' WHEN '04' THEN '공지사항'  END)
 		
 		as boardStatus from board 
 		
@@ -32,9 +34,24 @@
 		 where boardKind=#{on}
 		</if>
 	
-	
-	
 	</select>
+	
+	
+	<update id="updateBoard" parameterType="BoardDTO">
+	
+		<selectKey resultType="int" keyProperty="id" order="BEFORE">
+		
+			SELECT id from board where boardKind=#{boardKind} AND boardSubject=#{boardSubject} AND boardContent =#{boardContent}
+		
+		
+		</selectKey>
+	
+	
+		UPDATE board SET boardKind=#{boardKind}	,boardSubject=#{boardSubject} ,boardContent =#{boardContent} ,boardUpdateDate=now()
+	
+	</update>
+	
+	
 
 
 

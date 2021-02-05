@@ -10,16 +10,20 @@ import org.springframework.stereotype.Service;
 public class AdminDAO {
 	
 	@Autowired
-	private SqlSessionTemplate sqlSession;
+	private SqlSessionTemplate sqlSessionTmp;
 	
 	
-	public AdminDTO sortLoginAdmin(Map<String,Object> map) {
+	public AdminDTO adminLogin(Map<String,Object> map) {
 		
 		
+		System.out.println("serviceMap::::::::::::::::::"+map);
 		
-		return sqlSession.selectOne("sortLoginAdmin",map);
+	
+		
+		return sqlSessionTmp.selectOne("adminLogin",map);
+	
+	
 	}
-	
 	
 
 }

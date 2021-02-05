@@ -19,12 +19,12 @@
                 </ul>
         </nav>
 
-	<div style= "display:inline-flex; width:1600px;">
+		<div style="margin-top:100px; display:inline-flex;">
 	
-		<h2 style="margin:0 auto; padding:40px;"><a href="/board/adminBoardFrequncyPage">자주 하는 질문 페이지 글쓰기</a></h2>
+		<h2 style="padding:160px;"><a href="/board/adminBoardFrequncyPage">자주 하는 질문 페이지 글쓰기</a></h2>
 	
 	
-		<h2 style="margin:0 auto; padding:40px;"><a  href="/board/adminBoardNoticePage">공지사항 글쓰기 글쓰기</a></h2>
+		<h2 style="padding:160px;"><a  href="/board/adminBoardNoticePage">공지사항 글쓰기 글쓰기</a></h2>
 	
 	</div>
 	

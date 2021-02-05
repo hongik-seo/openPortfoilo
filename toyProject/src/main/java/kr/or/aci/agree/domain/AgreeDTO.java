@@ -27,6 +27,6 @@ public class AgreeDTO {
 	
 	private String agreeName;
 	
-	private int agreeFin;
+	private int agreeId;
 	
 }

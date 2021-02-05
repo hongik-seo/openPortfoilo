@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.or.aci.agree.domain.AgreeDAO;
 import kr.or.aci.agree.domain.AgreeDTO;
@@ -30,6 +28,10 @@ import kr.or.aci.email.domain.MailDTO;
 import kr.or.aci.isStatus.domain.IsStatusDAO;
 import kr.or.aci.join.domain.JoinDAO;
 import kr.or.aci.join.domain.JoinDTO;
+
+
+
+
 
 
 @Controller
@@ -210,28 +212,29 @@ public class MemberController {
 		
 		Map<String,Object> map=new HashMap<String, Object>();
 		
+		System.out.println(frm);
+		
 		try {
 			login=joinDAO.loginSelect(frm);
 			
 			
-			if(login!=null) {
-				Cookie loginCookie = new Cookie("loginCookie",String.valueOf(login.getId()));
+			
+			Cookie loginCookie = new Cookie("loginCookie",String.valueOf(login.getId()));
 
-				loginCookie.setPath("/"); 
-				
-				// 쿠키를 유지할 시간 설정(단위 : 초) 
-				loginCookie.setMaxAge(60*60*24*30); // 30일 동안 쿠키 유지. 
-				
-				response.addCookie(loginCookie); 
-				
-				System.out.println(login);
-				
-				
-				map.put("login", login);
-				
-				return map;
-
-			}
+			loginCookie.setPath("/"); 
+			
+			// 쿠키를 유지할 시간 설정(단위 : 초) 
+			loginCookie.setMaxAge(60*60*24*30); // 30일 동안 쿠키 유지. 
+			
+			response.addCookie(loginCookie); 
+			
+			System.out.println(login);
+			
+			
+			map.put("login", login);
+			
+			return map;
+			
 			
 		
 			

@@ -34,7 +34,7 @@
     	    }
 			
         	$.ajax({
-        	    url:'/admin/loginMap', //request 보낼 서버의 경로
+        	    url:'/admin/adminLoginMap', //request 보낼 서버의 경로
         	    type:'POST', // 메소드(get, post, put 등)
         	    dataType:"json",
         	    data:JSON.stringify(login),

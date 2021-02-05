@@ -22,7 +22,7 @@ public class JoinDAO {
 	
 	public JoinDTO loginSelect(Map<String,Object> map) {
 		
-		
+		System.out.println("loginMap::::::::"+map);
 		
 		
 			

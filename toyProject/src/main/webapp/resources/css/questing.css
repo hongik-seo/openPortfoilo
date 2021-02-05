@@ -136,12 +136,6 @@ article#qn{
 
 }
 
-ul#qn-list{
-    
-  
-   
-}
-
 div.odd-box{
 
     width: inherit;
@@ -152,13 +146,6 @@ div.odd-box{
   
     z-index: 0;
 
-}
-
-div.odd-box:nth-child(1){
-
-   
-    
-       
 }
 
 
@@ -189,11 +176,7 @@ div.even-box{
     
 }
 
-div.even-box p{
-	
-	text-align: center;
-	
-}
+
 
 p.subject{
 	
@@ -202,6 +185,11 @@ p.subject{
       	text-overflow:ellipsis;
      	 white-space:nowrap;
 	
+}
+
+li.clear{
+	
+	clear: both;
 }
 
 

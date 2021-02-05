@@ -15,7 +15,7 @@ import lombok.Setter;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Alias("EmailDTO")
+@Alias("MailDTO")
 public class MailDTO {
 
 	private int id;

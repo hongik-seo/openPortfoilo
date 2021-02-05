@@ -30,18 +30,23 @@
    	 <h2>업로드 게시판</h2>
 		<!--base bar-->
 		<article style="margin:300px;">
-		<form  method="POST"  action="/board/updateFile" enctype="multipart/form-data" >
+		<form  method="POST"  action="/board/updateFrm" enctype="multipart/form-data" >
 			
                     <select style="width: 190px;height: 50px;" name="boardKind" id="list">
+                    	<optgroup label="자주하는 질문">
+							<option value='01' 	<c:if test="${boardKind eq 1}">selected </c:if>>공연안내*예매</option>
+							<option value='02'	<c:if test="${boardKind eq 2}">selected </c:if>>대관</option>
+                        	<option value='03' 	<c:if test="${boardKind eq 3}">selected </c:if>>기타</option>
+                        </optgroup>
                         <optgroup label="공지사항">
-                        	<option value="04" >공지사항</option>
+                        	<option value="04" 	<c:if test="${boardKind eq 4}">selected </c:if> >공지사항</option>
 						</optgroup>
 					</select>
 				
 					<p>제목</p>
 					<!--제목 폼-->
 
-					<input type="text" id="subject" class="write" name="boardSubject" >
+					<input type="text" id="subject" class="write" name="boardSubject" value="${boardSubject}" placeholder="${boardSubject}">
 
 					<!--제목 폼-->
 				
@@ -53,12 +58,12 @@
 
 					<p>본문</p>
 
-					<textarea id="content" name="boardContent" class="write" cols="40" rows="8" ></textarea>
+					<textarea id="content" name="boardContent" class="write" cols="40" rows="8" placeholder="${boardContent}">${boardContent}</textarea>
 
                 
-					
-                    <input type="file" name="boardFileLocation">
-					
+					<c:if test="${boardKind eq 4 }">
+                    	<input type="file" name="boardFileLocation">
+					</c:if>
               
 
 				<!--등록 버튼-->

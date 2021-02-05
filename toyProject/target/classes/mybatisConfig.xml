@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
-    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "HTTP://mybatis.org/dtd/mybatis-3-config.dtd">
+
+
    
 <configuration>
-	 <!--  <settings>
+	  <!--  <settings>
 	  <setting name="cacheEnabled" value="true"/>
 	  <setting name="lazyLoadingEnabled" value="true"/>
 	  <setting name="multipleResultSetsEnabled" value="true"/>
@@ -22,12 +24,18 @@
 	</settings>
 -->
 
-    <typeAliases>
+      <typeAliases>
          <typeAlias alias="EmailDTO" type="kr.or.aci.email.domain.MailDTO"/>
          <typeAlias alias="AgreeDTO" type="kr.or.aci.agree.domain.AgreeDTO"/>
          <typeAlias alias="JoinDTO" type="kr.or.aci.join.domain.JoinDTO"/>
    		 <typeAlias alias="BoardDTO" type="kr.or.aci.board.domain.BoardDTO"/>
    		 <typeAlias alias="AdminDTO" type="kr.or.aci.admin.domain.AdminDTO"/>
+   		 <typeAlias alias="FileDTO" type="kr.or.aci.upload.domain.FileDTO"/>
     </typeAliases>
+	<mappers>
+	
+		
+	</mappers>
+	
 	
 </configuration>

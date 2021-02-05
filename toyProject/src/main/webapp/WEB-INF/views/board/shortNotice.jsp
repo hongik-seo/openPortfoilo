@@ -13,6 +13,9 @@
 
 </head>
 
+
+<%@ include file="/WEB-INF/views/include/header.jsp" %>   
+
     <nav>
                 <h1>커뮤니티</h1>
                 <ul id="member-tab">
@@ -67,7 +70,7 @@
                         </td>
 
                         <td>
-                            임의값
+              		${file}
 
                         </td>
 
@@ -93,4 +96,7 @@
 
 
   </div>
-        <!--//콘텐츠-->    
+        <!--//콘텐츠-->
+        
+<%@ include file="/WEB-INF/views/include/footer.jsp" %>   
+            

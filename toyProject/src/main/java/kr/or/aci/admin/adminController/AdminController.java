@@ -1,5 +1,6 @@
 package kr.or.aci.admin.adminController;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -40,19 +41,21 @@ public class AdminController {
 		return "/admin/adminLogin";	
 	}
 	
-	@PostMapping("/loginMap")
+	@PostMapping("/adminLoginMap")
 	@ResponseBody
-	public Map<String,Object>  sortLoginAdmin(@RequestBody Map<String,Object> map,HttpSession session) {
+	public Map<String,AdminDTO>  sortLoginAdmin(@RequestBody Map<String,Object> map,HttpSession session) {
 
 		System.out.println("adminPageLogin:::::::::"+map);
-
+		Map<String,AdminDTO> loginMap=new HashMap<String, AdminDTO>();
 
 		AdminDTO adminDTO=null;
 
 
 		try {
-			adminDTO=adminDAO.sortLoginAdmin(map);
+			adminDTO=adminDAO.adminLogin(map);
 		
+			System.out.println("adminDTO"+adminDTO);
+			
 			if(adminDTO!=null) {
 				
 				session.setAttribute("adminSession", adminDTO.getAdminStatus());
@@ -61,16 +64,16 @@ public class AdminController {
 				session.getAttribute("adminSession");
 				
 				
-				map.put("admin", adminDTO);
-				return map;
+				loginMap.put("admin", adminDTO);
+				return loginMap;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		
-		map.put("admin", adminDTO);
-		return map;
+		loginMap.put("admin", adminDTO);
+		return loginMap;
 	}
 	
 	@GetMapping("/adminLogout")

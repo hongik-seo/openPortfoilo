@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -43,9 +43,8 @@
 			
 			$($("a.on").eq(i)).click(function(){
 				
-				var on=i.toString();
 				
-				$(this).wrap("<form id='freqencyFrm' action='/board/questingView' method='get'>'<input type='hidden' name='on' value="+on+" >'</from>")
+				$(this).wrap("<form id='freqencyFrm' action='/board/questingView' method='get'>'<input type='hidden' name='on' value="+i+" >'</form>")
 				
 				
 				$("#freqencyFrm").submit();
@@ -54,6 +53,31 @@
 				
 				
 			})
+			
+		})
+		
+		
+		
+	$("li.result").each(function(i){
+		
+		
+				
+			$($("button[name='modiBtn']").eq(i)).click(function(){
+				
+				
+				var boardKind= $($("input[name='boardKind']").eq(i)).val();		
+				var boardSubject= $($("input[name='boardSubject']").eq(i)).val()		
+				var boardContent=$($("textarea[name='boardContent']").eq(i)).val()
+				
+				
+				
+				alert(boardKind);
+				
+				location.href="/board/modify?boardKind="+boardKind+"&boardSubject="+boardSubject+"&boardContent="+boardContent;
+				
+			})
+			
+		
 			
 		})
 		
@@ -115,23 +139,40 @@
                         <div class="odd-box">
                             <ul class="box-list">
                                 <li class="q">
-                                   <a>Q ${freqList.boardStatus}</a>
+                                   <a >Q ${freqList.boardStatus}</a>
+                                   
                                 </li>
                                 <li class="q">
-                                  <p class="subject"> ${freqList.boardSubject } </p>
-
-                                </li>
+                                  <p class="subject"> ${freqList.boardSubject} </p>
+								</li>
+                                <li class="clear">
+            					<c:if test="${adminSession eq 'pageAdmin'}">
+            						<button type="button" name="modiBtn" >수정</button>
+            					</c:if>
+            					</li>
+            		
                             </ul>
                         </div>
                     </li>
 
                     <li class="questing-even qli">
                         
-                        <div class="even-box" style="clear:both;">
-                           A ${freqList.boardContent }
+                        <div class="even-box" >
+                           A ${freqList.boardContent}
                         </div>
+                       
                     </li> 
+            		<li class="result">
+            		
+
+            			<input type="hidden"  name="boardKind" value="${freqList.boardKind}"/>
+            			<input type="hidden"  name="boardSubject" value="${freqList.boardSubject}"/>
+                   		<textarea name="boardContent" style="display:none">${freqList.boardContent}</textarea>
+            		</li>
             	</ul>
+            	
+                    
+      
             </c:forEach>
     </article>
         

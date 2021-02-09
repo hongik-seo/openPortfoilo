@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
-
+<c:set var="pageMark" value="${pageMark}"/>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -199,9 +199,9 @@
                     <strong>
                         <li class="mouse"><a>커뮤니티 </a></li>
                     </strong>
-                    <li><a>공지사항 </a></li>
+                    <li><a href="/board/boardList?on=04">공지사항 </a></li>
                     <li><a href="/board/questingView">자주하는 질문</a></li>
-                    <li><a>QNA</a></li>
+                    <!--  <li><a>QNA</a></li>-->
                     <c:if test="${adminSession eq 'pageAdmin'}">
                     <li><a href="/board/adminChoice">관리자 글쓰기</a></li>
                     </c:if>

@@ -31,6 +31,8 @@
    		 <typeAlias alias="BoardDTO" type="kr.or.aci.board.domain.BoardDTO"/>
    		 <typeAlias alias="AdminDTO" type="kr.or.aci.admin.domain.AdminDTO"/>
    		 <typeAlias alias="FileDTO" type="kr.or.aci.upload.domain.FileDTO"/>
+   		 <typeAlias alias="PageDTO" type="kr.or.aci.board.domain.PageDTO"/>
+   		 
     </typeAliases>
 	<mappers>
 	

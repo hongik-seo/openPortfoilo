@@ -7,34 +7,80 @@
 
 	<insert id="insertBoard" parameterType="java.util.List">
 	
+	
+	
 	INSERT into board  (boardKind,boardSubject,boardContent,boardWriter,boardOriFileName) values
 	
 	
 		
 			<foreach collection="list" item="item" separator="," >
-				<if test="item.boardKind !=null or item.boardSubject !='' ">
-					 (#{item.boardKind},#{item.boardSubject},#{item.boardContent},#{item.boardWriter},#{item.boardOriFileName})
+				<if test=" item.boardKind !=null or item.boardSubject !=null">
+					(#{item.boardKind},#{item.boardSubject},#{item.boardContent},#{item.boardWriter},#{item.boardOriFileName})
+				
 				</if>
+				
 			</foreach>
+			
+			
 	
 	</insert>
 
-	<select id="selectBoard" resultType="BoardDTO"   parameterType="java.lang.String" >
+	<select id="selectBoard" resultType="BoardDTO"   parameterType="java.util.HashMap"  >
 	
-		SELECT boardKind,boardSubject, boardContent, (CASE boardKind WHEN '01' THEN '공연안내 및 예매' WHEN '02' THEN '대관' WHEN '03' THEN '기타' WHEN '04' THEN '공지사항'  END)
+	
 		
-		as boardStatus from board 
+		SELECT id, boardKind,boardSubject, boardContent, (CASE boardKind WHEN '01' THEN '공연안내 및 예매' WHEN '02' THEN '대관' WHEN '03' THEN '기타' WHEN '04' THEN '공지사항'  END)
 		
+		as boardStatus,boardOriFileName, DATE_FORMAT(boardWriterDate, '%Y-%m-%d') as boardWriterDate 
 		
+		FROM board  
+
 		<if test='on == "0"'>
-		where 1=1
+		where 1=1 AND boardKind != '04'
 		</if>
 		
-		<if test='on != "0"'>
-		 where boardKind=#{on}
+		<if test='on !="0"'>
+		 where boardKind=#{on} 
+		 
 		</if>
+		<if test="pageNum==1">
+		 
+		 
+		</if> 
+	
+		 <if test="cri.endPage!=cri.pageNum">
+		 
+		 	LIMIT #{pageOffset},#{cri.amount}
+		 
+		 </if>
+		 
+		 <if test="cri.endPage==cri.pageNum">
+		 
+		 	LIMIT #{pageOffset},#{retotal}
+		 
+		 </if>
+		
+		
 	
 	</select>
+	
+	
+	
+	
+	<select id="selectBoardDetail" resultType="BoardDTO"   parameterType="java.util.HashMap" >
+	
+		SELECT id, boardKind,boardSubject, boardContent, (CASE boardKind WHEN '01' THEN '공연안내 및 예매' WHEN '02' THEN '대관' WHEN '03' THEN '기타' WHEN '04' THEN '공지사항'  END)
+		
+		as boardStatus,boardOriFileName, DATE_FORMAT(boardWriterDate, '%Y-%m-%d') as boardWriterDate, boardHitNumber ,boardWriter from board 
+		
+		
+		where 1=1 And id=#{list} or id=#{prev} or id=#{next}
+		 
+		
+		
+	
+	</select>
+	
 	
 	
 	<update id="updateBoard" parameterType="BoardDTO">
@@ -51,8 +97,24 @@
 	
 	</update>
 	
+	<update id="hitNumber" parameterType="java.lang.Integer">
 	
+		
+	
+		update board set boardHitNumber = (boardHitNumber+1)
+		
+		where id=#{list}
+	
+	
+	</update>
 
+	<select id="total"  resultType="int" parameterType="java.util.HashMap">
+	
+	
+		Select count(*) from board where boardKind=#{on}
+		
+	
+	</select>
 
 
 </mapper>

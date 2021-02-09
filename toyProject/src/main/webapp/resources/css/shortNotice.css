@@ -99,14 +99,24 @@ thead{
 }
 
 tbody{
-    background-color: black;
+    background-color: #8b6d49;
 
 }
 
 tbody td{
 
-    color:white;
+    color:black;
 }
+tbody a{
+	
+	color:ghostwhite;
+	overflow:hidden;
+      	text-overflow:ellipsis;
+     	white-space:nowrap;
+	
+}
+
+
 
 h2{
 

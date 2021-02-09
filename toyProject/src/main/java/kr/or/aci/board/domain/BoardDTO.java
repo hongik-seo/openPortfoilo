@@ -1,12 +1,16 @@
 package kr.or.aci.board.domain;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import org.apache.ibatis.type.Alias;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
@@ -20,6 +24,7 @@ import lombok.experimental.Accessors;
 public class BoardDTO {
 
 	
+
 	private int id; //int AI PK 
 	
 	private String boardWriter; //varchar(100) 
@@ -41,5 +46,9 @@ public class BoardDTO {
 	private Timestamp boardDeleteDate; //date 
 
 	private String boardStatus;
+	
+	
+	
+	
 	
 }

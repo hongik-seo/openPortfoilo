@@ -1,10 +1,18 @@
 package kr.or.aci.upload.domain;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
@@ -58,14 +66,47 @@ public class FileUtil {
 		
 	}
 	
-	public FileDTO selectFile(String orginFileName) {
-		
-		
-		
-		return fileDAO.fileSelect(orginFileName);
-		
-	}
+	public void downLoad(HttpServletResponse response,String fileName) throws IOException {
 	
+	String download="D:\\servelet Eclipse\\eclipse\\workspace\\upload\\"+fileName;
+		
+	 byte[] fileByte = FileUtils.readFileToByteArray(new File(download));
+	 
+	 if(fileName.contains(".pdf") ||fileName.contains(".jpg") ||fileName.contains(".png")) {
+	 
+	 response.getOutputStream().write(fileByte);
+	 response.getOutputStream().flush();
+	 response.getOutputStream().close();
 	
+	 }else{
+		 
+		 FileDTO fileDTO =fileDAO.fileSelect(fileName);
+		
+		 
+		 response.setHeader("Content-Disposition",
+	                "attachment; filename=\"" + URLEncoder.encode(fileDTO.getOrginFileName(), "UTF-8") + "\"");
+		 response.setHeader("Content-Transfer-Encoding", "binary");
+		 response.setHeader("Content-Type", "application/octet-stream");
+		 response.setHeader("Pragma", "no-cache;");
+		 response.setHeader("Expires", "-1;");
+	      
+		 FileInputStream fis = null;
 
+		 try {
+
+	            File file = new File(fileDTO.getUploadPath()+"\\" + fileDTO.getOrginFileName());
+	            fis = new FileInputStream(file);
+
+	            IOUtils.copy(fis, response.getOutputStream());
+
+	        } catch (IOException ioe) {
+	            ioe.printStackTrace();
+	        } finally {
+	            IOUtils.closeQuietly(fis);
+	        }
+	 
+	 }
+	
+	}
+	       
 }

@@ -1,13 +1,17 @@
 package kr.or.aci.board.boardController;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.aci.board.domain.BoardDAO;
 import kr.or.aci.board.domain.BoardDTO;
-import kr.or.aci.upload.domain.FileDTO;
+import kr.or.aci.board.domain.PageDTO;
 import kr.or.aci.upload.domain.FileUtil;
 
 
@@ -42,7 +46,7 @@ public class BoardController {
 		
 		
 		
-		return "/board/adminBoardChoice";
+		return "/admin/adminBoardChoice";
 	}
 	
 	@GetMapping("/adminBoardFrequncyPage")
@@ -50,7 +54,7 @@ public class BoardController {
 		
 		
 		
-		return "/board/adminBoardFrequncyPage";
+		return "/admin/adminBoardFrequncyPage";
 	}
 	
 	
@@ -82,7 +86,7 @@ public class BoardController {
 		
 		
 		
-		return "/board/adminBoardNoticePage";
+		return "/admin/adminBoardNoticePage";
 	}
 	
 	
@@ -91,12 +95,12 @@ public class BoardController {
 	
 	@PostMapping("/updateFile")
 	public ModelAndView updateFrm(
-			@RequestPart(name="boardFileLocation") MultipartFile file,
+			@RequestPart(name="boardOriFileName") MultipartFile file,
 			@RequestParam(value="boardSubject") String boardSubject,
 			@RequestParam(value="boardWriter") String boardWriter,
 			@RequestParam(value="boardContent") String boardContent,
 			@RequestParam(value="boardKind") String boardKind
-			) {
+			) throws IOException {
 		
 		
 		ModelAndView mav=new ModelAndView();
@@ -108,6 +112,8 @@ public class BoardController {
 		
 		String orginFileName = file.getOriginalFilename();
 	    
+		System.out.println("orginFileName:::::::::::::"+orginFileName);
+		
 		map.put("boardSubject", boardSubject);
 		map.put("boardWriter", boardWriter);
 		map.put("boardContent", boardContent);
@@ -118,31 +124,15 @@ public class BoardController {
 		boardDAO.insertBoard(list);
 		
 		
-		
 		fileUtil.upLoad(file);
+	
 		
-		
-		
-		FileDTO fileDB=fileUtil.selectFile(orginFileName);
-	        
-		
-		map.put("fileDB", fileDB);
-		
-		    
-		
-		mav.addObject("file",map);
-		
-	    mav.setViewName("/board/boardDetail");
+	    mav.setViewName("/admin/adminBoardNoticePage");
 	    	
 	    return mav;
 		
 	}
 
-	
-	
-	
-	
-	
 	
 	
 
@@ -154,9 +144,11 @@ public class BoardController {
 		
 		ModelAndView mav=new ModelAndView();
 		
+		Map<String,Object> map=new HashMap<String, Object>();
 		
-		List<BoardDTO> freqList=boardDAO.selectBoard(on);
+		map.put("on", on);
 		
+		List<BoardDTO> freqList=boardDAO.selectBoard(map);
 		
 		
 		
@@ -186,15 +178,137 @@ public class BoardController {
 			
 			
 			
-			mav.setViewName("/board/adminBoardModifyPage");
+			mav.setViewName("/admin/adminBoardModifyPage");
 		
 		
 		return mav;
 	}
 	
 	
-
+	@GetMapping("/boardList")
+	public ModelAndView boardList(@RequestParam(value="on") String on, 
+			@RequestParam(defaultValue = "1") int pageNum,
+			@RequestParam(defaultValue = "10") int amount,
+			Model model) {
+		
+		System.out.println(pageNum);
+		System.out.println(amount);
+		
+		Map<String,Object> map=new HashMap<String, Object>();
+		
+		List<PageDTO> pageList=new ArrayList<PageDTO>();
+		
+		
+		ModelAndView mav=new ModelAndView();
 	
+		map.put("on", on);
+		
+	
+		int total=boardDAO.total(map);
+		
+		
+
+		PageDTO pageMark =new PageDTO(pageNum, amount, total);
+		
+		
+		
+		int offSet = (pageMark.getPageNum()-1)*amount ;
+		
+		int retotal=(int)Math.floor(total%amount);
+		
+		
+		
+		map.put("retotal",retotal);
+		
+		map.put("pageOffset", offSet);
+		
+		map.put("cri", pageMark);
+		
+		mav.addObject("pageMark",pageMark);
+		
+		List<BoardDTO> list=boardDAO.selectBoard(map);
+		
+		pageList.add(pageMark);
+		
+		
+		
+		
+		
+		
+		mav.addObject(pageList);
+		
+		System.out.println("mav......................."+mav);
+		
+		mav.addObject("list",list);
+		
+		mav.setViewName("/board/shortNoticeList");
+		return mav;
+	}
+	
+	@GetMapping("/noticeBoardDetail")
+	public String noticeBoardDetail(
+			@RequestParam (value="list") int list,
+			@RequestParam (value="index") int index,
+			@RequestParam(value="prev",required = false) int prev,
+			@RequestParam(value ="next",required = false) int next,
+		
+			Model model) {
+		
+		
+		
+		System.out.println("prev"+prev);
+
+		System.out.println("next"+next);
+		
+
+		Map<String,Integer> map=new HashMap<String, Integer>();
+		
+
+		boardDAO.hitNumber(list);
+		
+		
+		
+		
+		map.put("list", list);
+		
+		map.put("prev", prev);
+		
+		map.put("next", next);
+		
+		
+		
+
+		List<BoardDTO> noticeDetail=boardDAO.selectBoardDetail(map);
+		
+		
+		
+		
+
+		model.addAttribute("prev",prev);
+
+		model.addAttribute("next",next);
+		
+		model.addAttribute("list",list);
+		model.addAttribute("noticeDetail",noticeDetail);
+		
+		model.addAttribute("index",index);
+		
+		return "/board/noticeBoardDetail";
+	}
+	
+	
+	@PostMapping("/download")
+	public void download(
+			
+			@RequestParam("file") String fileName,
+			HttpServletResponse response
+			) throws IOException {
+		
+		
+		fileUtil.downLoad(response, fileName);
+		
+		
+	}
 	
 	
 	

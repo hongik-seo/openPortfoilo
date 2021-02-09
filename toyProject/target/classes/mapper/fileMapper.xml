@@ -17,8 +17,8 @@
 
 	<select id="fileSelect" resultType="FileDTO" parameterType="java.lang.String">
 	
-		SELECT f.orginFileName FROM file f join board b on f.orginFileName = b.boardOriFileName where boardKind=04 AND f.orginFileName=#{orginFileName};
-	
+		SELECT f.orginFileName,f.uploadPath FROM file f join board b on f.orginFileName = b.boardOriFileName where boardKind=04 AND f.orginFileName=#{orginFileName} 
+		
 	
 	</select>
 

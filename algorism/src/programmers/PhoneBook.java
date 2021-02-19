@@ -13,7 +13,7 @@ public class PhoneBook {
 		Solution2 s=new Solution2();
 		Scanner sc=new Scanner(System.in);
 		
-		System.out.println("전화 번호는의 개수는?");
+		System.out.println("전화번호 목록 갯수");
 		
 		int num=sc.nextInt();
 		

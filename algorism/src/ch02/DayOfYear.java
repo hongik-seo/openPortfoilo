@@ -69,6 +69,8 @@ public class DayOfYear {
 		System.out.println("¿œ");
 		int day=sc.nextInt();;
 		int comday=0;
+		
+		
 		for(int i=0; i<month; i++) {
 
 		comday=(isLeap(year)==1) ? 29 : days[i];

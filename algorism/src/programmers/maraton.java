@@ -3,7 +3,7 @@ package programmers;
 import java.util.Scanner;
 import java.util.TreeMap;
 
-public class maraton {
+public class Maraton {
 
 	
 	public static void main(String[] args) {

@@ -10,7 +10,7 @@ public class PhoneBook {
 
 	public static void main(String[] args) {
 		
-		Solution2 s=new Solution2();
+		Solution sol=new Solution();
 		Scanner sc=new Scanner(System.in);
 		
 		System.out.println("전화번호 목록 갯수");
@@ -19,20 +19,21 @@ public class PhoneBook {
 		
 		String[] phone_book=new String[num];
 		
-		System.out.println(s.solution(phone_book));;
+		System.out.println(sol.solution(phone_book));;
 	
 	
 	}
 	
 }
 
-class Solution2 {
+class Solution {
 	
 	
     public boolean solution(String[] phone_book) {
     	
     	Scanner sc=new Scanner(System.in);
-        int count=0;
+  
+    	boolean answer=true;
        
         HashMap<Integer,String> map=new HashMap<Integer, String>();
         
@@ -53,8 +54,8 @@ class Solution2 {
     	
     		if((phone_book[0]).equals(comBook)) {
     			
-    	        count++;
-   
+    	        
+    			answer=false;
     	     
     		}
     	
@@ -63,7 +64,7 @@ class Solution2 {
     	}
     	System.out.println(map);
 		
-    	boolean answer = count>1?false:true;
+    	
     	
     	return answer;
     	

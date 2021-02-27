@@ -33,38 +33,43 @@ class Solution {
     	
     	Scanner sc=new Scanner(System.in);
   
-    	boolean answer=true;
+    	
        
         HashMap<Integer,String> map=new HashMap<Integer, String>();
-        
-    	for(int i=0; i<phone_book.length; i++) {
+        int count=0;
+        int i=0;
+
+        while(i<phone_book.length) {
     		
+        
     		
     		phone_book[i]=sc.nextLine().replaceAll("\\s", "");
     		
     		
     		map.put(i, phone_book[i]);
     		
-    		int leng= phone_book[0].length()<phone_book[i].length()? phone_book[0].length() :phone_book[i].length()  ;
+    		int leng= phone_book[0].length()<=phone_book[i].length()? phone_book[0].length() :phone_book[i].length()  ;
     		
     		
-    		String comBook=(phone_book[i]).substring(0,leng);
+    		
+    		String comBook=phone_book[i].substring(0,leng);
     		
     		
     	
-    		if((phone_book[0]).equals(comBook)) {
+    		if(phone_book[0].contains(comBook)) {
     			
-    	        
-    			answer=false;
+    			count++;
+    			System.out.println(count);
     	     
     		}
     	
     		
-    	
+    		i++;
+    		
     	}
     	System.out.println(map);
 		
-    	
+    	boolean answer = count > 1 ? false : true;
     	
     	return answer;
     	

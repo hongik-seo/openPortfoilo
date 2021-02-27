@@ -43,14 +43,9 @@ public class OverlapStop {
 class Solution3 {
     public int[]  solution(int []arr) {
     	Scanner sc=new Scanner(System.in);
-
-		int[] answer= {};
-		
-		
-		
 		ArrayList<Integer> list=new ArrayList<Integer>();
     	Deque<Integer> dq=new LinkedList<Integer>();
-    	ArrayList<Integer> list2=new ArrayList<Integer>();
+    	dq.push(-1);
     	
     	for(int i=0; i<arr.length; i++) {
     		
@@ -60,42 +55,29 @@ class Solution3 {
    
     		dq.add(arr[i]);
     	
-    		list.add(arr[i]);
+    		
+    		if(dq.pollFirst() != arr[i] ) {
+        		
+    			list.add(arr[i]);
+    			
+    		}
     	}
 
-    	dq.push(0);
+
+    	int[] answer=new int[list.size()];
     	
     	for(int i=0; i<list.size(); i++) {
     		
-    		if(dq.pollFirst() != list.get(i)) {
+    		
+    		if(list.get(i)!=0) {
     			
-    			System.out.println(dq.element());
-    			list2.add(dq.element());
+    			answer[i]=list.get(i);
     			
     		}
-    		
-    		
-    		
-    		
+    	
     	}
     	
-    	System.out.println(list2);
-    	
-    	answer=new int[list2.size()];
-    	
-    	for(int k=0; k<answer.length; k++) {
-    		
-    	
-    		answer[k]=list2.get(k);
-    		
-    		if(answer.length-1==k) {
-    			
-    			
-    			return answer;
-    		}
-    	}    	
-    	
-    	
+    
     	return answer;
     }
 }

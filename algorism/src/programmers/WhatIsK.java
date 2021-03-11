@@ -1,6 +1,5 @@
 package programmers;
 
-
 import java.util.*;
 
 
@@ -35,20 +34,16 @@ class Solution2 {
     public int[] solution(int[] array, int[][] commands) {
         Scanner sc= new Scanner(System.in);
 
-        String sum="";
-        CharSequence charSequence="";
-
-
-        Set<Integer> set=new LinkedHashSet<>();
+        ArrayList<Integer> list=new ArrayList<>();
         System.out.println("각각의 요소");
         for(int a=0; a<array.length; a++){
 
             array[a]=sc.nextInt();
 
-            sum+=array[a];
+            System.out.println(array[a]);
+
 
         }
-
 
         for(int a=0; a<commands.length; a++) {
 
@@ -59,38 +54,28 @@ class Solution2 {
             System.out.println("위치");
             int k = sc.nextInt();
 
-
             commands[a][0] = i;
             commands[a][1] = j;
             commands[a][2] = k;
 
-            charSequence = sum.subSequence(i - 1, j);
+            int[] newArr=Arrays.copyOfRange(array,i-1,j);
 
-            char[] chars = String.valueOf(charSequence).toCharArray();
 
-            Arrays.sort(chars);
-
-            for (int b=0; b<chars.length; b++){
-
-                int tt=chars[k-1]-48;
-
-                set.add(tt);
+            Arrays.sort(newArr);
 
 
 
-            }
+            list.add(newArr[k-1]);
+
+
 
         }
 
-        int[] answer=new int[set.size()];
-
-        Iterator<Integer> iterator = set.iterator();
+        int[] answer=new int[list.size()];
 
         for (int i=0; i<answer.length; i++){
 
-            answer[i]=iterator.next();
-
-            System.out.println(answer[i]);
+            answer[i]=list.get(i);
 
         }
 

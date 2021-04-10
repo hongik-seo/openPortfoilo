@@ -11,7 +11,6 @@ public class APIController {
     @GetMapping("/hello")
     public String hello(){
 
-        System.out.println("in???");
 
         return "helle spring boot";
     }

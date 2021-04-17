@@ -13,16 +13,14 @@ class HelloApplicationTests {
     void contextLoads() throws JsonProcessingException {
 
         System.out.println("hello");
-
         ObjectMapper objectMapper =new ObjectMapper();
 
         //object -> text
         //object mapper get method를 활용한다
-        User user=new User("steve",10,"01011112222","abc");
 
+        User user=new User("steve",10,"01011112222","abc");
         String text=objectMapper.writeValueAsString(user);
         System.out.println(text);
-
         //text-> object
         //object 디폴트 생성자가 있어야함
 

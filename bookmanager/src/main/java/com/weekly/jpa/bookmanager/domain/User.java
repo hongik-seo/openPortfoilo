@@ -1,10 +1,9 @@
 package com.weekly.jpa.bookmanager.domain;
-
 import lombok.*;
 import lombok.experimental.Accessors;
-import org.springframework.web.bind.annotation.GetMapping;
+import javax.persistence.*;
+import java.sql.Timestamp;
 
-import java.time.LocalDateTime;
 
 
 @Getter
@@ -16,16 +15,22 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode
 @Builder
 @Accessors(chain = true)
+@Entity
+@SequenceGenerator(sequenceName = "TEST_SEQUENCE", name = "userTest" , allocationSize = 1)
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+            generator = "userTest")
+    private Long id;
 
     @NonNull
     private String name;
-
+    @NonNull
     private String email;
 
-    private LocalDateTime createAt;
+    private Timestamp created_at;
 
-    private LocalDateTime updateAt;
+    private Timestamp updated_at;
 
     /*
     @Override

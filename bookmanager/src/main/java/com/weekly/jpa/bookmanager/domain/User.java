@@ -16,11 +16,12 @@ import java.sql.Timestamp;
 @Builder
 @Accessors(chain = true)
 @Entity
-@SequenceGenerator(sequenceName = "TEST_SEQUENCE", name = "userTest" , allocationSize = 1)
+//@SequenceGenerator(sequenceName = "TEST_SEQUENCE", name = "userTest" , allocationSize = 1)
 public class User {
+
+    //@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "userTest")
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,
-            generator = "userTest")
+    @GeneratedValue
     private Long id;
 
     @NonNull

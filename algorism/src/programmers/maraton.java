@@ -1,71 +1,68 @@
 package programmers;
-/*
 
-import java.util.Scanner;
-import java.util.TreeMap;
+import java.util.*;
 
-public class Maraton {
+class Solution4 {
 
-	
-	public static void main(String[] args) {
-		
-		
-		Solution solution=new Solution();
-		
-		Scanner sc=new Scanner(System.in);
-		
-		System.out.println("몇명이 참여 했나요?");
-		int length=sc.nextInt();
-		
-		if(length>0 || length<100000) {
+    public String solution(String[] participant, String[] completion) {
 
-			
-			String[] participant=new String[length];
+        String answer = "";
 
-			if(length>0) {
+        participant = new String[]{"marina", "josipa", "nikola", "vinko", "filipa"};
 
-				String[] completion=new String[length-1];
+        completion = new String[]{"josipa", "filipa", "marina", "nikola"};
 
-				System.out.println("탈락자"+solution.solution(participant, completion));;
+        HashMap<String, String> map = new HashMap<>();
 
-			}
-		}
-		
-		
-		
-	}
-	
-	
-	
+
+        for (int i = 0; i < participant.length; i++) {
+
+            map.put(participant[i],participant[i]);
+
+
+        }
+
+        for(int i =0; i<completion.length; i++){
+
+            map.remove(completion[i],completion[i]);
+
+            if(map.isEmpty()){
+
+                map.putIfAbsent(participant[i],participant[i]);
+
+            }
+        }
+
+        System.out.println(map);
+
+        answer=map.keySet().iterator().next();
+        return answer;
+
+    }
+
 }
 
+class Maraton {
+
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        Solution4 solution4 = new Solution4();
+
+        String[] participant=null;
+
+        String[] completion=null;
+
+        Solution4 sol=new Solution4();
+
+        System.out.println(sol.solution(participant,completion));
 
 
 
-class Solution {
-    public String solution(String[] participant, String[] completion) {
-        TreeMap<Integer,String> tree=new TreeMap<>();
-    	Scanner sc=new Scanner(System.in);
-    	String answer = "";
-    	String fail="";
-    	for(int i=0; i<participant.length; i++) {
-    		
-    		participant[i]=sc.next();
-        	
-    		fail=tree.put(i, participant[i]);
-    	
-    		System.out.print("참여자");
-    		System.out.println(tree);
-    		
-    	}
-    	
-    	int ran=(int)(Math.random()*completion.length);
-    	
-    	answer=tree.put(ran, fail);
-    	
-    	
-    	
-    	
-        return answer;
+
+
     }
-}*/
+
+}

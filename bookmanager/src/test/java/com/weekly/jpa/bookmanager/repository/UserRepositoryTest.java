@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.*;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -102,9 +102,53 @@ class UserRepositoryTest {
 
         userRepository.findAll(example).forEach(x-> System.out.println(x));
 
+    }
+
+
+    @Test
+    void update(){
+
+        userRepository.save(new User("david","david@test.com"));
+
+        User user=userRepository.findById(1L).orElseThrow(null);
+
+        user.setEmail("martin-updated@test.com");
+
+        userRepository.save(user);
 
 
     }
 
+    @Test
+    void select(){
+
+        System.out.println("findFirstByName"+userRepository.findFirstByName("martine"));
+
+        System.out.println("findByName"+userRepository.findByName("dennis"));
+
+        System.out.println("findByEmail" + userRepository.findByEmail("test@test.com"));
+
+        System.out.println("getByEmail" + userRepository.getByEmail("test@test.com"));
+
+        System.out.println("readByEmail" + userRepository.readByEmail("test@test.com"));
+
+        System.out.println("queryByEmail" + userRepository.queryByEmail("test@test.com"));
+
+        System.out.println("searchByEmail" + userRepository.searchByEmail("test@test.com"));
+
+        System.out.println("streamByEmail" + userRepository.streamByEmail("test@test.com"));
+
+        System.out.println("findUserByEmail" + userRepository.findUserByEmail("test@test.com"));
+
+        //BeanCreationException: Error creating bean with name 'userRepository' defined
+        //System.out.println("findByOptional"+ userRepository.findByOptional("test@test.com"));
+
+        //limit 키워드가 붙음
+        System.out.println("findFirst2ByName" + userRepository.findFirst2ByName("martine"));
+
+        System.out.println("findTop2ByName" + userRepository.findTop2ByName("martine"));
+
+        System.out.println("findLast1ByName"+userRepository.findLast1ByName("martine"));
+    }
 
 }

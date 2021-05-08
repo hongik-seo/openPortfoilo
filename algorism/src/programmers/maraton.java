@@ -12,7 +12,9 @@ class Solution4 {
 
         completion = new String[]{"josipa", "filipa", "marina", "nikola"};
 
-        HashMap<String, String> map = new HashMap<>();
+
+        Map<String,String> map = new LinkedHashMap<>();
+
 
 
         for (int i = 0; i < participant.length; i++) {
@@ -22,20 +24,17 @@ class Solution4 {
 
         }
 
-        for(int i =0; i<completion.length; i++){
+        for(int i=0; i<completion.length; i++){
 
             map.remove(completion[i],completion[i]);
 
-            if(map.isEmpty()){
-
-                map.putIfAbsent(participant[i],participant[i]);
-
-            }
         }
 
         System.out.println(map);
 
-        answer=map.keySet().iterator().next();
+
+
+        System.out.println(answer);
         return answer;
 
     }

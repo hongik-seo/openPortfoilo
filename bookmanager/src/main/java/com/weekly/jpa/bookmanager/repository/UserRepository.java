@@ -4,6 +4,8 @@ import com.weekly.jpa.bookmanager.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,4 +42,19 @@ public interface UserRepository extends JpaRepository<User,Long> {
     //last 정의된 단어가 아니라 무시된다.
     List<User> findLast1ByName(String name);
 
+    List<User> findByEmailAndName(String email,String name);
+
+    List<User> findByEmailOrName(String email,String name);
+
+    List<User> findByCreatedAtAfter(LocalDateTime yesterday);
+
+    List<User> findByIdAfter(Long id);
+
+    List<User> findByCreatedAtGreaterThan(LocalDateTime yesterday);
+
+    List<User> findByCreatedAtGreaterThanEqual(LocalDateTime yesterday);
+
+    List<User> findByCreatedAtBetween(LocalDateTime yesterday,LocalDateTime tomorrow);
+
+    List<User> findByIdBetween(Long id1,Long id2);
 }

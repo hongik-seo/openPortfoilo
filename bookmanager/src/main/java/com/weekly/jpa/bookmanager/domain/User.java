@@ -3,7 +3,7 @@ import lombok.*;
 import lombok.experimental.Accessors;
 import javax.persistence.*;
 import java.sql.Timestamp;
-
+import java.time.LocalDateTime;
 
 
 @Getter
@@ -29,9 +29,9 @@ public class User {
     @NonNull
     private String email;
 
-    private Timestamp created_at;
+    private LocalDateTime createdAt;
 
-    private Timestamp updated_at;
+    private LocalDateTime updatedAt;
 
     /*
     @Override

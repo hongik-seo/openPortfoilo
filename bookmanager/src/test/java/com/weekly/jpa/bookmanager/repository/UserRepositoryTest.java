@@ -8,6 +8,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.*;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -122,7 +125,9 @@ class UserRepositoryTest {
     @Test
     void select(){
 
+
         System.out.println("findFirstByName"+userRepository.findFirstByName("martine"));
+
 
         System.out.println("findByName"+userRepository.findByName("dennis"));
 
@@ -149,6 +154,23 @@ class UserRepositoryTest {
         System.out.println("findTop2ByName" + userRepository.findTop2ByName("martine"));
 
         System.out.println("findLast1ByName"+userRepository.findLast1ByName("martine"));
+
+        System.out.println("findByEmailAndName" + userRepository.findByEmailAndName("test@test.com","martine"));
+
+        System.out.println("findByEmailOrName" +userRepository.findByEmailOrName("test@test.com","martine"));
+
+        System.out.println("findByCreatedAtAfter" + userRepository.findByCreatedAtAfter(LocalDateTime.now().minusDays(1L)));
+
+        System.out.println("findByIdAfter" + userRepository.findByIdAfter(4L));
+
+        System.out.println("findByCreatedAtGreaterThan"+userRepository.findByCreatedAtGreaterThan(LocalDateTime.now().minusDays(1L)));
+
+        System.out.println("findByCreatedAtGreaterThanEqual"+userRepository.findByCreatedAtGreaterThanEqual(LocalDateTime.now().minusDays(1L)));
+
+        System.out.println("findByCreatedAtBetween"+userRepository.findByCreatedAtBetween(LocalDateTime.now().minusDays(1L),LocalDateTime.now().plusDays(1L)));
+
+        System.out.println("findByIdBetween"+userRepository.findByIdBetween(1L,3L));
+
     }
 
 }

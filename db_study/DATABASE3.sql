@@ -396,9 +396,30 @@ SELECT ENAME
      ;
     
     
-     
-     
-         
-         
-      
-      
+    SELECT DEPTNO 
+         , TRUNC(AVG(SAL)) AS AVG_SAL
+         , MAX(SAL) AS MAX_SAL
+         , MIN(SAL) AS MIN_SAL
+         , COUNT(EMPNO)
+      FROM EMP 
+     GROUP BY ROLLUP(DEPTNO)
+     HAVING DEPTNO IN (10,20,30)
+     ORDER BY DEPTNO DESC
+     ;
+   
+     SELECT NVL2(COMM ,'X','O') AS EXIST_COMM
+          , COUNT(*)
+       FROM EMP 
+      GROUP BY NVL2(COMM ,'X','O')
+      ;
+    
+      SELECT DEPTNO 
+           , TO_CHAR(HIREDATE,'YYYY') AS HIRE_YEAR
+           , COUNT(*)
+           , MAX(SAL)
+           , SUM(SAL)
+           , AVG(SAL)
+       FROM EMP 
+      GROUP BY CUBE(DEPTNO,TO_CHAR(HIREDATE,'YYYY'))
+      ORDER BY DEPTNO
+     ;

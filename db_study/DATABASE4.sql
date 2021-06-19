@@ -95,6 +95,7 @@ SELECT *
        , E2.ENAME AS MGR_ENAME
     FROM EMP E1 , EMP E2
    WHERE E1.MGR = E2.EMPNO(+) 
+   ORDER BY E1.EMPNO
    ;
    -- 오른쪽 외부조인 사용하기
    -- 오른쪽 기준 
@@ -106,6 +107,161 @@ SELECT *
        , E2.ENAME AS MGR_ENAME
     FROM EMP E1 , EMP E2
    WHERE E1.MGR(+) = E2.EMPNO 
+   ORDER BY E1.EMPNO
+   ;
+  
+  -- natural join
+  -- 등가조인을 대신해 사용할 수 있는 조인 방식
+  -- 조인 대상이 되는 두 테이블에 이름과 자료형이 같은 열을 찾은 후 그 열을 기준으로 등가조인을 해주는 방식
+  -- 자료형이 같을경우 테이블 이름을 붙이면 안됨
+  SELECT E.EMPNO
+       , E.ENAME 
+       , E.JOB 
+       , E.MGR 
+       , E.HIREDATE 
+       , E.SAL 
+       , E.COMM 
+       , DEPTNO 
+       , D.DNAME 
+       , D.LOC 
+    FROM EMP E 
+ NATURAL JOIN DEPT D 
+   ORDER BY DEPTNO , E.EMPNO 
    ;
    
+   -- JOIN USING
+   -- 기존 등가 조인을 대신하는 조인 방식
+   -- NATURAL JOIN이 자동으로 조인 기준열을 지정하는 거소가 달리 USING 키워드에 조인 기준으로 사용할 열을 명시하여 사용해야함
+   -- NATURAL JOIN과 마찬가지로 조인 기중열로 명시된 열은 SELECT 절에 테이블을 이름을 붙이지 않고 작성
   
+  SELECT E.EMPNO
+       , E.ENAME 
+       , E.JOB 
+       , E.MGR 
+       , E.HIREDATE 
+       , E.SAL 
+       , E.COMM 
+       , DEPTNO 
+       , D.DNAME 
+       , D.LOC 
+    FROM EMP E 
+    JOIN DEPT D 
+   USING (DEPTNO)
+   WHERE SAL>=3000
+   ORDER BY DEPTNO , E.EMPNO 
+   
+   --JOIN ON 
+   SELECT E.EMPNO
+       , E.ENAME 
+       , E.JOB 
+       , E.MGR 
+       , E.HIREDATE 
+       , E.SAL 
+       , E.COMM 
+       , E.DEPTNO 
+       , D.DNAME 
+       , D.LOC 
+    FROM EMP E 
+    JOIN DEPT D 
+      ON E.DEPTNO = D.DEPTNO 
+   WHERE SAL<=3000
+   ORDER BY DEPTNO , E.EMPNO 
+    
+   -- OUTER JOIN
+   
+     SELECT E1.EMPNO 
+          , E1.ENAME 
+          , E1.MGR 
+          , E2.EMPNO AS MGR_EMPNO
+          , E2.ENAME AS MGR_ENAME
+       FROM EMP E1
+ LEFT OUTER JOIN EMP E2
+         ON E1.MGR = E2.EMPNO 
+      ORDER BY E1 .EMPNO 
+      ;
+     
+     SELECT E1.EMPNO 
+          , E1.ENAME 
+          , E1.MGR 
+          , E2.EMPNO AS MGR_EMPNO
+          , E2.ENAME AS MGR_ENAME
+       FROM EMP E1
+ RIGHT OUTER JOIN EMP E2
+         ON E1.MGR = E2.EMPNO 
+      ORDER BY E1 .EMPNO 
+      ;
+   
+     SELECT E1.EMPNO 
+          , E1.ENAME 
+          , E1.MGR 
+          , E2.EMPNO AS MGR_EMPNO
+          , E2.ENAME AS MGR_ENAME
+       FROM EMP E1
+ FULL OUTER JOIN EMP E2
+         ON E1.MGR = E2.EMPNO 
+      ORDER BY E1 .EMPNO 
+      ;
+      
+     SELECT E.EMPNO
+          , E.JOB 
+          , E.MGR 
+          , E.HIREDATE 
+          , E.SAL 
+          , E.COMM 
+          , DEPTNO 
+          , D.LOC 
+       FROM EMP E 
+       JOIN DEPT D USING (DEPTNO) 
+      WHERE SAL >=3000
+        AND E.MGR IS NOT NULL 
+      ORDER BY DEPTNO , E.EMPNO 
+      ;
+      
+     SELECT DEPTNO 
+          , D.DNAME 
+          , FLOOR( AVG(E.SAL)) AS AVG_SAL
+          , MAX(E.SAL) AS MAX_SAL
+          , MIN(E.SAL) AS MIN_SAL
+          , COUNT(DEPTNO) AS CNT
+       FROM DEPT D
+       JOIN  EMP E
+      USING (DEPTNO) 
+      GROUP BY DEPTNO , D.DNAME 
+      ;
+      
+      SELECT D.DEPTNO 
+          , D.DNAME 
+          , E.EMPNO 
+          , E.ENAME 
+          , E.JOB 
+          , E.SAL 
+       FROM DEPT D
+ LEFT OUTER JOIN EMP E
+         ON D.DEPTNO = E.DEPTNO 
+      ORDER BY D.DEPTNO , E.ENAME 
+      ;
+      
+    SELECT  D.DEPTNO 
+          , D.DNAME 
+          , E.EMPNO 
+          , E.ENAME
+          , E.MGR 
+          , E.SAL 
+          , E.DEPTNO 
+          , S.LOSAL 
+          , S.HISAL 
+          , S.GRADE
+          , MGR.EMPNO 
+          , MGR.ENAME 
+       FROM EMP E 
+RIGHT OUTER JOIN DEPT D 
+         ON E.DEPTNO = D.DEPTNO 
+LEFT OUTER JOIN SALGRADE S 
+         ON E.SAL BETWEEN S.LOSAL AND S.HISAL 
+LEFT OUTER JOIN EMP MGR  
+         ON E.MGR = MGR.EMPNO 
+      ORDER BY D.DEPTNO , E.EMPNO 
+     ;
+    
+    
+      
